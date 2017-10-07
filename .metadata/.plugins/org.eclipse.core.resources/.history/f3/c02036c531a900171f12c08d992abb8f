@@ -1,0 +1,7 @@
+package ronan_hanley.inside_av;
+
+import org.newdawn.slick.state.StateBasedGame;
+
+public class InsideAV extends StateBasedGame {
+
+}

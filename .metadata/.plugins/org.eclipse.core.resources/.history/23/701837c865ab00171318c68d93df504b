@@ -1,0 +1,16 @@
+package ronan_hanley.inside_av;
+
+/**
+ * A class for using an image with characters
+ * in it as a font.
+ * 
+ * Concept taken from Markus Persson's ludum dare
+ * games (specifically Metagun http://ludumdare.com/compo/ludum-dare-18/?action=preview&uid=398)
+ * 
+ * All code and assets relating to this were created by me, though.
+ * 
+ * @author Ronan
+ */
+public class ImageFont {
+
+}

@@ -1,0 +1,7 @@
+package ronan_hanley.inside_av.game_states;
+
+import org.newdawn.slick.state.BasicGameState;
+
+public class MenuState extends BasicGameState {
+
+}
