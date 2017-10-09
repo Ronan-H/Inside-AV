@@ -1,0 +1,18 @@
+package ronan_hanley.inside_av.menu_button;
+
+/**
+ * A set of MenuButtons, for use in a menu.
+ * @author Ronan
+ *
+ */
+public class ButtonSet {
+	private int startX;
+	private int startY;
+	private int spacing;
+	private MenuButton[] buttons;
+	
+	public ButtonSet() {
+		
+	}
+	
+}

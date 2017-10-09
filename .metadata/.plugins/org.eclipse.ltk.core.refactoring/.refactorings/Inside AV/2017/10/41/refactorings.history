@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;ronan_hanley.inside_av.menu_button.MenuButton.draw(...)&apos; to &apos;render&apos;&#x0D;&#x0A;- Original project: &apos;Inside AV&apos;&#x0D;&#x0A;- Original element: &apos;ronan_hanley.inside_av.menu_button.MenuButton.draw(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;ronan_hanley.inside_av.menu_button.MenuButton.render(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;draw&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;ronan_hanley.inside_av.menu_button{MenuButton.java[MenuButton~draw~QGraphics;" name="render" references="true" stamp="1507579040135" version="1.0"/>
+</session>

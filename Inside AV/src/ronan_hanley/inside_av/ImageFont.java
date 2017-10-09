@@ -1,5 +1,7 @@
 package ronan_hanley.inside_av;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 /**
@@ -31,8 +33,18 @@ public class ImageFont {
 	public ImageFont(Image charSheet, String format, int charWidth, int charHeight) {
 		this.charSheet = charSheet;
 		this.format = format;
+		this.charWidth = charWidth;
+		this.charHeight = charHeight;
 		
 		createFont();
+	}
+	
+	public int getCharWidth() {
+		return charWidth;
+	}
+	
+	public int getCharHeight() {
+		return charHeight;
 	}
 	
 	/**
@@ -41,8 +53,71 @@ public class ImageFont {
 	 * Should be called only once on creation of this object.
 	 */
 	private void createFont() {
+		chars = new Image[format.length()];
+		
+		final int ROW_LENGTH = charSheet.getWidth() / charWidth;
+		final int COL_LENGTH = charSheet.getHeight() / charHeight;
+		
 		for (int i = 0; i < format.length(); ++i) {
+			int xPos = i % ROW_LENGTH;
+			int yPos = i / ROW_LENGTH;
 			
+			chars[i] = charSheet.getSubImage(xPos * charWidth, yPos * charHeight, charWidth, charHeight);
+		}
+	}
+	
+	/**
+	 * Draws a string to a graphics object, using this
+	 * font.
+	 * 
+	 * @param string The string to draw to the graphics oject.
+	 * @param x Start of string (x). (top left of string)
+	 * @param y Start of string (y). (top left of string)
+	 * @param color The color to use when drawing this string.
+	 * @param scale Scale of the drawn string.
+	 * Eg. Scale of 5 means each pixel in the charSheet is 5x5 pixels when drawn.
+	 * @param g The graphics object to draw to.
+	 */
+	public void drawString(String string, int x, int y, Color color, int scale, boolean centered, Graphics g) {
+		int cursorX = x;
+		int cursorY = y;
+		
+		int lineCount = 0;
+		String[] lines = null;
+		if (centered) {
+			lines = string.split("\n");
+			cursorX -= (lines[lineCount++].length() * scale * charWidth) / 2;
+		}
+		
+		final int CHAR_SCREEN_WIDTH = charWidth * scale;
+		final int CHAR_SCREEN_HEIGHT = charHeight * scale;
+		
+		string = string.toUpperCase();
+		
+		for (int i = 0; i < string.length(); ++i) {
+			char c = string.charAt(i);
+			int charIndex = format.indexOf(c);
+			
+			if (c == '\n') {
+				cursorX = x;
+				
+				if (centered) {
+					cursorX -= (lines[lineCount++].length() * scale * charWidth) / 2;
+				}
+				
+				cursorY += CHAR_SCREEN_HEIGHT;
+				continue;
+			}
+			
+			// draw character
+			g.drawImage(chars[charIndex],
+					cursorX, cursorY, // screen start
+					cursorX + CHAR_SCREEN_WIDTH, cursorY + CHAR_SCREEN_HEIGHT, // screen end
+					0, 0, // image start
+					charWidth, charHeight, // image end
+					color);
+			
+			cursorX += CHAR_SCREEN_WIDTH;
 		}
 	}
 	
