@@ -30,19 +30,30 @@ public class MenuButton {
 		this.text = text;
 	}
 	
+	public void setHovering(boolean hovering) {
+		this.hovering = hovering;
+	}
+	
+	public boolean isHovering() {
+		return hovering;
+	}
+	
 	public void render(Graphics g) {
 		Color currentColor = (hovering ? hoverColor : color);
 		g.setColor(currentColor);
 		g.fillRect(x, y, width, height);
 		
+		// calculate spacing to center the text
+		// adjustments are made to account for the additional spacing of the characters
+		// (1 pixel to the right and 2 pixels below)
 		int fontScale = height / InsideAV.font.getCharHeight();
-		int fontHeight = InsideAV.font.getCharHeight() * fontScale;
+		int fontHeight = (InsideAV.font.getCharHeight() - 2) * fontScale;
 		int marginY = height - fontHeight;
 		
 		int fontWidth = InsideAV.font.getCharWidth() * text.length() * fontScale;
-		int marginX = width - fontWidth;
+		int marginX = width - fontWidth + fontScale;
 		
-		InsideAV.font.drawString(text, x + marginX /2, y + marginY /2, Color.white, height / InsideAV.font.getCharHeight(), false, g);
+		InsideAV.font.drawString(text, x + (marginX /2), y + (marginY /2), Color.white, fontScale, false, g);
 	}
 	
 }

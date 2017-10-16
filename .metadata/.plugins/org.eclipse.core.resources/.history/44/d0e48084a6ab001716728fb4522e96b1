@@ -1,7 +1,0 @@
-package ronan_hanley.inside_av.menu_button;
-
-public class ButtonSet {
-	private int startX;
-	private int startY;
-	private int spacing;
-}

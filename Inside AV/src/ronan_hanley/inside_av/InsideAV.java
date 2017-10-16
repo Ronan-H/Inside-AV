@@ -40,7 +40,7 @@ public class InsideAV extends StateBasedGame {
 		String format =
 			"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?:;+-=*#%^&_|/\\~\"'`$@()[]{}<> ";
 		try {
-			font = new ImageFont(new Image("res/computer_font.png", false, Image.FILTER_NEAREST), format, 6, 9);
+			font = new ImageFont(new Image("res/images/computer_font.png", false, Image.FILTER_NEAREST), format, 6, 9);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -48,8 +48,8 @@ public class InsideAV extends StateBasedGame {
 	
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		addState(new MenuState());
-		addState(new PlayingState());
+		addState(new MenuState(this));
+		addState(new PlayingState(this));
 		
 		init();
 		

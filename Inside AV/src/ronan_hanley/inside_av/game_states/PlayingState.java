@@ -6,20 +6,24 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class PlayingState extends BasicGameState {
+public class PlayingState extends InsideAVState {
+
+	public PlayingState(StateBasedGame sbg) {
+		super(sbg);
+	}
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		
 	}
-
+	
 	@Override
-	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		
 	}
 
 	@Override
-	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		
 	}
 

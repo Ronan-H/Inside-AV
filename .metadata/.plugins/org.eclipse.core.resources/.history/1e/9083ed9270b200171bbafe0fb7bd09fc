@@ -1,0 +1,28 @@
+package ronan_hanley.inside_av;
+
+import java.awt.image.BufferedImage;
+
+/**
+ * Represents the route the enemies will take
+ * in the level
+ * @author Ronan
+ */
+public class LevelRoute {
+	private BufferedImage image;
+	
+	public LevelRoute(int levelNumber) {
+		String imgPath = String.format("res/images/level_routes/level_%d_route.png", levelNumber);
+	}
+	
+	/**
+	 * A direction and a target location. Enemies use
+	 * a list of these to correctly make their way around
+	 * the map.
+	 * @author Ronan
+	 */
+	class LevelRouteInstruction {
+		// clockwise from up (0=up, 1=right, 2=down, 3=left)
+		int direction;
+	}
+	
+}
