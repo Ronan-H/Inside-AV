@@ -16,7 +16,7 @@ import org.newdawn.slick.Image;
  * 
  * @author Ronan
  */
-public class ImageFont {
+public final class ImageFont {
 	private Image charSheet;
 	private String format;
 	private int charWidth;

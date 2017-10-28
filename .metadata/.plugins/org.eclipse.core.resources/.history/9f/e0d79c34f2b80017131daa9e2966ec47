@@ -1,0 +1,9 @@
+package ronan_hanley.inside_av.testing;
+
+public class TestLevelRoute {
+	
+	public static void main(String[] args) {
+		LevelRoute testRoute = new LevelRoute(0);
+	}
+	
+}

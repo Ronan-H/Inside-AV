@@ -1,0 +1,5 @@
+package ronan_hanley.inside_av.enemy;
+
+public abstract class Enemy {
+
+}

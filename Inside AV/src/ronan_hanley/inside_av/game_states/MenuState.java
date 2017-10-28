@@ -13,7 +13,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import ronan_hanley.inside_av.InsideAV;
 import ronan_hanley.inside_av.menu_button.ButtonSet;
 
-public class MenuState extends InsideAVState {
+public final class MenuState extends InsideAVState {
 	private Image background;
 	private ButtonSet menuButtons;
 	private static final int TITLE_SCALE = 7;

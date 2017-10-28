@@ -7,7 +7,7 @@ import org.newdawn.slick.Graphics;
  * A set of MenuButtons, for use in a menu.
  * @author Ronan
  */
-public class ButtonSet {
+public final class ButtonSet {
 	private int startX;
 	private int startY;
 	private int buttonWidth;

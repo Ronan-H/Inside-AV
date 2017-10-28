@@ -17,7 +17,7 @@ import ronan_hanley.inside_av.game_states.PlayingState;
  * @author Ronan Hanley
  *
  */
-public class InsideAV extends StateBasedGame {
+public final class InsideAV extends StateBasedGame {
 	// Some constants about the basics of the game
 	private static final String GAME_NAME = "Inside AV";
 	public static final int TILE_SIZE = 32;

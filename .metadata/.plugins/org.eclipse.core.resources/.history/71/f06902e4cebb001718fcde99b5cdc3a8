@@ -1,0 +1,12 @@
+package ronan_hanley.inside_av.enemy;
+
+import org.newdawn.slick.Image;
+
+public class TrackingCookie extends Enemy {
+	private static Image SPRITE;
+	
+	public TrackingCookie(int x, int y) {
+		super(x, y);
+	}
+
+}

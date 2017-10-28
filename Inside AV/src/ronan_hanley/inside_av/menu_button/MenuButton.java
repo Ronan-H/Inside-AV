@@ -10,7 +10,7 @@ import ronan_hanley.inside_av.InsideAV;
  * can be clicked.
  * @author Ronan
  */
-public class MenuButton {
+public final class MenuButton {
 	private int x;
 	private int y;
 	private int width;
