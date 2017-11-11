@@ -1,0 +1,56 @@
+package ronan_hanley.inside_av.enemy;
+
+import org.newdawn.slick.Image;
+
+import ronan_hanley.inside_av.DrawableEntity;
+import ronan_hanley.inside_av.LevelRoute;
+import ronan_hanley.inside_av.LevelRouteInstruction;
+
+public abstract class Enemy extends DrawableEntity {
+	private int maxHealth;
+	private int health;
+	private double speed;
+	private LevelRoute route;
+	private int direction;
+	private int instruction;
+	
+	public Enemy(int x, int y, double speed, int maxHealth, Image sprite, LevelRoute route) {
+		super(x, y, sprite);
+		this.speed = speed;
+		this.maxHealth = maxHealth;
+		this.health = maxHealth;
+		this.route = route;
+		direction = 1;
+		instruction = 0;
+	}
+	
+	/**
+	 * 
+	 * @return True if the enemy has reached the end point
+	 */
+	public boolean update() {
+		// update position, based on direction and speed
+		int[][] offsets = LevelRoute.OFFSETS;
+		changeX(speed * offsets[direction][0]);
+		changeY(speed * offsets[direction][1]);
+		
+		// change direction, if it's necessary
+		// check if we've reached the target location
+		LevelRouteInstruction[] instructions = route.getInstructions();
+		LevelRouteInstruction currentInstruction = instructions[instruction];
+		
+		if (currentInstruction.hasReachedTarget(this)) {
+			if (instruction == instructions.length - 1) {
+				// instructions finished, this enemy has reached the end point
+				return true;
+			} else {
+				// go to next instruction, and change direction
+				++instruction;
+				direction = instructions[instruction].getDirection();
+			}
+		}
+		
+		return false;
+	}
+	
+}

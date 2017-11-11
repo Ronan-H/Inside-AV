@@ -3,6 +3,8 @@ package ronan_hanley.inside_av.enemy;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ronan_hanley.inside_av.LevelRoute;
+
 public class Virus extends Enemy {
 	private static Image SPRITE;
 	
@@ -15,8 +17,12 @@ public class Virus extends Enemy {
 		}
 	}
 	
-	public Virus(int x, int y) {
-		super(x, y, SPRITE);
+	public Virus(int x, int y, LevelRoute route) {
+		super(x, y, 1.5, 500, SPRITE, route);
+	}
+	
+	public double getSystemDamage() {
+		return 100;
 	}
 	
 }

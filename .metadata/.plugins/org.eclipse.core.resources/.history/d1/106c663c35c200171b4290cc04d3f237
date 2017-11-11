@@ -1,0 +1,12 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import org.newdawn.slick.Image;
+
+public abstract class BulletWeaponSystem extends WeaponSystem {
+	
+	
+	public double getCost() {
+		return 1000;
+	}
+	
+}

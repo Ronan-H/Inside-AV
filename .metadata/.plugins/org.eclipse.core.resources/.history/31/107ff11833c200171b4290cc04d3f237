@@ -1,0 +1,17 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import org.newdawn.slick.Image;
+
+public abstract class WeaponSystem extends Entity{
+	private Image sprite;
+	private Image ammo;
+	
+	public WeaponSystem(int x, int y, Image sprite) {
+		
+	}
+	
+	public void render() {
+		
+	}
+	
+}

@@ -1,0 +1,9 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+public class Tier1RocketWeaponSystem extends {
+
+	public Tier1WeaponSystem(int x, int y, String spritePath) {
+		super(x, y, "bullet/tier1.png");
+	}
+
+}

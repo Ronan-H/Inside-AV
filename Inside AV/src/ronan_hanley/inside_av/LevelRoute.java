@@ -8,55 +8,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-
 /**
  * Represents the route the enemies will take
  * in the level
  * @author Ronan
  */
 public final class LevelRoute {
-	
-	/**
-	 * A direction and a target location. Enemies use
-	 * a list of these to correctly make their way around
-	 * the map.
-	 * @author Ronan
-	 */
-	class LevelRouteInstruction {
-		// clockwise from up (0=up, 1=right, 2=down, 3=left)
-		private int direction;
-		private int targetTileX;
-		private int targetTileY;
-		
-		public LevelRouteInstruction(int direction, int targetTileX, int targetTileY) {
-			this.direction = direction;
-			this.targetTileX = targetTileX;
-			this.targetTileY = targetTileY;
-		}
-		
-		public int getDirection() {
-			return direction;
-		}
-		
-		public int getTargetTileX() {
-			return targetTileX;
-		}
-		
-		public int getTargetTileY() {
-			return targetTileY;
-		}
-		
-		@Override
-		public String toString() {
-			return String.format("Dir: %d targetX: %d targetY: %d", direction, targetTileX, targetTileY);
-		}
-		
-	}
-	
 	public static final int START_COLOR = Color.GREEN.getRGB();
 	public static final int END_COLOR = Color.RED.getRGB();
 	public static final int ROUTE_COLOR = Color.BLACK.getRGB();
 	public static final int SOLID_COLOR = Color.WHITE.getRGB();
+	public static final int[][] OFFSETS = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 	private BufferedImage image;
 	private LevelRouteInstruction[] routeInstructions;
 	
@@ -116,16 +78,16 @@ public final class LevelRoute {
 		int lastX = -1000;
 		int lastY = -1000;
 		
-		int[][] offsets = {{0, -1}, {1, 0}, {0, 1}, {-1, 0}};
 		int counter = 0;
 		outerLoop:
 		while ((x == endPoint.x && y == endPoint.y) == false) {
-			System.out.printf("x: %d y: %d%n", x, y); 
+			// DEBUG
+			// System.out.printf("x: %d y: %d%n", x, y); 
 			
 			// Search for adjacent ROUTE_COLOR pixel
-			for (int i = 0; i < offsets.length; ++i) {
-				int newX = x + offsets[i][0];
-				int newY = y + offsets[i][1];
+			for (int i = 0; i < OFFSETS.length; ++i) {
+				int newX = x + OFFSETS[i][0];
+				int newY = y + OFFSETS[i][1];
 				
 				// DEBUG:
 				//System.out.printf("current: (%d, %d) - last: (%d, %d) - new: (%d, %d)%n", x, y, lastX, lastY, newX, newY);
@@ -165,7 +127,7 @@ public final class LevelRoute {
 	 */
 	private LevelRouteInstruction[] optimizeInstructions(ArrayList<LevelRouteInstruction> instructions) {
 		for (int i = 0; i < instructions.size() -1; ++i) {
-			if (instructions.get(i).direction == instructions.get(i + 1).direction) {
+			if (instructions.get(i).getDirection() == instructions.get(i + 1).getDirection()) {
 				instructions.remove(i--);
 			}
 		}
@@ -181,6 +143,10 @@ public final class LevelRoute {
 	
 	public BufferedImage getImage() {
 		return image;
+	}
+	
+	public LevelRouteInstruction[] getInstructions() {
+		return routeInstructions;
 	}
 	
 	@Override

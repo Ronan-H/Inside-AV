@@ -2,29 +2,51 @@ package ronan_hanley.inside_av;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ronan_hanley.inside_av.enemy.Enemy;
+
 public final class Level {
 	private Image solidImage;
 	private LevelRoute route;
+	private Wave[] waves;
+	private int currentWave;
+	// True if enemies are being spawned
+	private boolean waveActive = true;
 	
 	public Level(int levelNumber) {
 		route = new LevelRoute(levelNumber);
 		
 		String solidImgPath = String.format("res/images/level_textures/level_%d_solid_tile.png", levelNumber);
 		try {
-			solidImage = new Image(solidImgPath);
+			solidImage = new Image(solidImgPath, false, Image.FILTER_NEAREST);
 		} catch (SlickException e) {
 			/* This exception should never happen as long as the files
 			 * are in the right place, so just print the stack trace.
 			 */
 			e.printStackTrace();
+		}
+		
+		// Load in the wave info
+		File[] waveFiles = new File("res/wave_info/level_" + levelNumber).listFiles();
+		int numWaves = waveFiles.length;
+		waves = new Wave[numWaves];
+		
+		for (int i = 0; i < numWaves; ++i) {
+			waves[i] = new Wave(waveFiles[i].getPath(), route);
+		}
+		
+		currentWave = 0;
+	}
+	
+	public void update(ArrayList<Enemy> enemies) {
+		if (waveActive) {
+			boolean lastEnemy = waves[currentWave].updateWave(enemies);
+			waveActive = !lastEnemy;
 		}
 	}
 	

@@ -3,6 +3,8 @@ package ronan_hanley.inside_av.enemy;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ronan_hanley.inside_av.LevelRoute;
+
 public class Rootkit extends Enemy {
 	private static Image SPRITE;
 	
@@ -15,9 +17,12 @@ public class Rootkit extends Enemy {
 		}
 	}
 	
-	public Rootkit(int x, int y) {
-		super(x, y, SPRITE);
+	public Rootkit(int x, int y, LevelRoute route) {
+		super(x, y, 1.0, 1000, SPRITE, route);
 	}
 	
+	public double getSystemDamage() {
+		return 300;
+	}
 	
 }

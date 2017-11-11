@@ -1,0 +1,8 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import java.util.ArrayList;
+
+public class WeaponsSystemGrid {
+	private WeaponsSystem[][] grid;
+	private ArrayList<WeaponsSystem> weaponsSystems;
+}

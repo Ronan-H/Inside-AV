@@ -20,11 +20,12 @@ import ronan_hanley.inside_av.game_states.PlayingState;
 public final class InsideAV extends StateBasedGame {
 	// Some constants about the basics of the game
 	private static final String GAME_NAME = "Inside AV";
+	public static final int FPS = 60;
 	public static final int TILE_SIZE = 32;
 	// Maybe doing these calculations in code is overkill
 	// 480 x 480
-	private static final int SCREEN_TILES_X = 15;
-	private static final int SCREEN_TILES_Y = 15;
+	public static final int SCREEN_TILES_X = 15;
+	public static final int SCREEN_TILES_Y = 15;
 	public static final int SCREEN_WIDTH = SCREEN_TILES_X * TILE_SIZE;
 	public static final int SCREEN_HEIGHT = SCREEN_TILES_Y * TILE_SIZE;
 	public static int screenScale;
@@ -57,12 +58,8 @@ public final class InsideAV extends StateBasedGame {
 		enterState(0);
 	}
 	
-	// Main Method
-	// Copied from http://slick.ninjacave.com/wiki/index.php?title=Game_States
-	// But heavily modified
     public static void main(String[] args) {
         try {
-        	final int FPS = 60;
         	final int LOGIC_INTERVAL = 1000 / FPS;
         	
             AppGameContainer app = new AppGameContainer(new InsideAV());
@@ -83,9 +80,10 @@ public final class InsideAV extends StateBasedGame {
             
             app.setDisplayMode(ADJUSTED_WIDTH, ADJUSTED_HEIGHT, false);
             app.setTargetFrameRate(FPS);
-            app.setShowFPS(true);
+            app.setShowFPS(false);
             app.setMaximumLogicUpdateInterval(LOGIC_INTERVAL);
             app.setMaximumLogicUpdateInterval(LOGIC_INTERVAL);
+            app.setVSync(true);
             app.start();
         } catch(SlickException e) {
             e.printStackTrace();

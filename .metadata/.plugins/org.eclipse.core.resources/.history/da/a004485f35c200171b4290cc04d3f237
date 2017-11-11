@@ -1,0 +1,16 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import org.newdawn.slick.Image;
+
+public abstract class BulletWeaponSystem extends WeaponSystem {
+	
+	public BulletWeaponSystem(int x, int y, Image sprite) {
+		super(x, y);
+		this.sprite = sprite;
+	}
+	
+	public double getCost() {
+		return 1000;
+	}
+	
+}

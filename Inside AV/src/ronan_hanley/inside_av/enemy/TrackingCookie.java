@@ -3,6 +3,8 @@ package ronan_hanley.inside_av.enemy;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import ronan_hanley.inside_av.LevelRoute;
+
 public class TrackingCookie extends Enemy {
 	private static Image SPRITE;
 	
@@ -15,8 +17,12 @@ public class TrackingCookie extends Enemy {
 		}
 	}
 	
-	public TrackingCookie(int x, int y) {
-		super(x, y, SPRITE);
+	public TrackingCookie(int x, int y, LevelRoute route) {
+		super(x, y, 3.0, 20, SPRITE, route);
 	}
-
+	
+	public double getSystemDamage() {
+		return 50;
+	}
+	
 }

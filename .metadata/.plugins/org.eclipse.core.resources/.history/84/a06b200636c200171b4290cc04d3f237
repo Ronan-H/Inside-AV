@@ -1,0 +1,11 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import org.newdawn.slick.Image;
+
+public final class Tier1BulletWeaponSystem extends BulletWeaponSystem {
+
+	public Tier1BulletWeaponSystem(int x, int y) {
+		super(x, y, "res/images/weapons/bullet/tier1.png");
+	}
+
+}
