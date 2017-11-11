@@ -62,4 +62,8 @@ public final class Level {
 		}
 	}
 	
+	public boolean solidAt(int x, int y) {
+		return route.solidAt(x, y);
+	}
+	
 }

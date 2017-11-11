@@ -108,12 +108,17 @@ public final class PlayingState extends InsideAVState {
 				}
 			}
 			
+			// render money amount
+			final int MONEY_TEXT_SCALE = 3;
+			InsideAV.font.drawString(String.format("Money:%.1f BTC", playerMoney),
+				InsideAV.STATUS_PANEL_START + MONEY_TEXT_SCALE, MONEY_TEXT_SCALE, Color.white, 2, false, g);
 			break;
 		case Substate.TUTORIAL:
 			int rectStart = InsideAV.TILE_SIZE;
-			int rectSize = InsideAV.SCREEN_WIDTH - (rectStart * 2);
+			int rectWidth = InsideAV.SCREEN_WIDTH - (rectStart * 2);
+			int rectHeight = InsideAV.SCREEN_HEIGHT - (rectStart * 2);
 			g.setColor(Color.white);
-			g.fillRect(rectStart, rectStart, rectSize, rectSize);
+			g.fillRect(rectStart, rectStart, rectWidth, rectHeight);
 			
 			final int TUT_TEXT_SCALE = 3;
 			int cursorX = rectStart + 2;
@@ -132,6 +137,9 @@ public final class PlayingState extends InsideAVState {
 		x /= InsideAV.screenScale;
 		y /= InsideAV.screenScale;
 		
+		// check if the mouse is outside the level area
+		if (x >= InsideAV.STATUS_PANEL_START) return;
+		
 		if (selectingWeapon) {
 			int offsetX = (x - weaponWheelX);
 			int offsetY = (y - weaponWheelY);
@@ -142,7 +150,6 @@ public final class PlayingState extends InsideAVState {
 			} else {
 				// user clicked a weapon
 				WeaponSystem weapon = null;
-				double wepCost = -1;
 				int wepX = weaponWheelX / InsideAV.TILE_SIZE;
 				int wepY = weaponWheelY / InsideAV.TILE_SIZE;
 				
@@ -160,8 +167,8 @@ public final class PlayingState extends InsideAVState {
 					}
 				}
 				
-				if (wepCost <= playerMoney) {
-					wepCost = weapon.getCost();
+				double wepCost = weapon.getCost();
+				if (playerMoney >= wepCost) {
 					playerMoney -= wepCost;
 					weapons.addWeaponSystem(weapon, wepX, wepY);
 				}
@@ -172,6 +179,10 @@ public final class PlayingState extends InsideAVState {
 			// not selecting weapon yet
 			int tileX = x / InsideAV.TILE_SIZE;
 			int tileY = y / InsideAV.TILE_SIZE;
+			
+			// check if the player clicked a wall
+			if (!currentLevel.solidAt(tileX, tileY)) return;
+			
 			if (weapons.tileHasWeapon(tileX, tileY)) {
 				// weapon upgrades
 				
@@ -195,7 +206,16 @@ public final class PlayingState extends InsideAVState {
 	public void keyPressed(int key, char c) {
 		switch (substate) {
 		case Substate.PLAYING:
-			
+			switch (key) {
+			case Input.KEY_SPACE:
+				// start the next wave, if it can be started
+				if (!waveActive) {
+					// TODO fill out this bit. Load the next wave.
+					
+					waveActive = true;
+				}
+				break;
+			}
 			break;
 		case Substate.TUTORIAL:
 			switch (key) {
