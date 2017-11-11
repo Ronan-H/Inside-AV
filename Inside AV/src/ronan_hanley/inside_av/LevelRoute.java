@@ -149,6 +149,10 @@ public final class LevelRoute {
 		return routeInstructions;
 	}
 	
+	public boolean solidAt(int x, int y) {
+		return (image.getRGB(x, y) == SOLID_COLOR);
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

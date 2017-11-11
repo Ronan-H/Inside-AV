@@ -22,12 +22,14 @@ public final class InsideAV extends StateBasedGame {
 	private static final String GAME_NAME = "Inside AV";
 	public static final int FPS = 60;
 	public static final int TILE_SIZE = 32;
+	public static final int STATUS_PANEL_SIZE = TILE_SIZE * 7;
 	// Maybe doing these calculations in code is overkill
 	// 480 x 480
 	public static final int SCREEN_TILES_X = 15;
 	public static final int SCREEN_TILES_Y = 15;
-	public static final int SCREEN_WIDTH = SCREEN_TILES_X * TILE_SIZE;
+	public static final int SCREEN_WIDTH = SCREEN_TILES_X * TILE_SIZE + STATUS_PANEL_SIZE;
 	public static final int SCREEN_HEIGHT = SCREEN_TILES_Y * TILE_SIZE;
+	public static final int STATUS_PANEL_START = SCREEN_WIDTH - STATUS_PANEL_SIZE;
 	public static int screenScale;
 	
 	public static ImageFont font;
@@ -69,15 +71,14 @@ public final class InsideAV extends StateBasedGame {
             
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             
-            /* Allow some space to the sides so the window
+            /* Allow some space on the top/bottom of the window so it
              * doesn't overlap over the taskbar etc.
              */
-            screenSize.height -= 65;
+            screenSize.height -= 50;
             
             screenScale = screenSize.height / SCREEN_HEIGHT;
-            final int ADJUSTED_WIDTH = SCREEN_HEIGHT * screenScale;
+            final int ADJUSTED_WIDTH = SCREEN_WIDTH * screenScale;
             final int ADJUSTED_HEIGHT = SCREEN_HEIGHT * screenScale;
-            
             app.setDisplayMode(ADJUSTED_WIDTH, ADJUSTED_HEIGHT, false);
             app.setTargetFrameRate(FPS);
             app.setShowFPS(false);

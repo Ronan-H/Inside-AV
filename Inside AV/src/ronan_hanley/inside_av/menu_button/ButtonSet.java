@@ -92,7 +92,7 @@ public final class ButtonSet {
 		// Search through the buttons for a button that's selected
 		for (int i = 0; i < buttons.length; ++i) {
 			if (buttons[i].isHovering()) {
-				System.out.printf("DEBUG: Button %d clicked.%n", i);
+				// System.out.printf("DEBUG: Button %d clicked.%n", i);
 				return i;
 			}
 		}
