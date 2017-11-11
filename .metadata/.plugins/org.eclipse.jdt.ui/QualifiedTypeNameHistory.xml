@@ -8,12 +8,12 @@
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.LevelRoute.LevelRouteInstruction"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.Level"/>
 <fullyQualifiedTypeName name="java.awt.Point"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.Entity"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.WeaponSystemGrid"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.BulletWeaponSystem"/>
-<fullyQualifiedTypeName name="ronan_hanley.inside_av.InsideAV"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Graphics"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
+<fullyQualifiedTypeName name="ronan_hanley.inside_av.InsideAV"/>
 </qualifiedTypeNameHistroy>
