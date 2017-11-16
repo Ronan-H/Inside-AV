@@ -1,0 +1,16 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import org.newdawn.slick.Image;
+
+public final class Tier1BulletWeaponSystem extends BulletWeaponSystem {
+	public static final Image SPRITE = new Image("res/images/weapons/bullet/tier.png", false, Image.FILTER_NEAREST);;
+	
+	public Tier1BulletWeaponSystem(int x, int y) {
+		super(x, y, "bullet/tier1.png");
+	}
+	
+	public int getFireInterval() {
+		return 10;
+	}
+	
+}

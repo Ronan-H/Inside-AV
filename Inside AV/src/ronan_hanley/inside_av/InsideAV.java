@@ -81,7 +81,7 @@ public final class InsideAV extends StateBasedGame {
             final int ADJUSTED_HEIGHT = SCREEN_HEIGHT * screenScale;
             app.setDisplayMode(ADJUSTED_WIDTH, ADJUSTED_HEIGHT, false);
             app.setTargetFrameRate(FPS);
-            app.setShowFPS(false);
+            app.setShowFPS(true);
             app.setMaximumLogicUpdateInterval(LOGIC_INTERVAL);
             app.setMaximumLogicUpdateInterval(LOGIC_INTERVAL);
             app.setVSync(true);

@@ -53,11 +53,11 @@ public abstract class Entity {
 	}
 	
 	public void changeX(double change) {
-		setX(getX() + change);
+		setX(getXExact() + change);
 	}
 	
 	public void changeY(double change) {
-		setY(getY() + change);
+		setY(getYExact() + change);
 	}
 	
 	/**

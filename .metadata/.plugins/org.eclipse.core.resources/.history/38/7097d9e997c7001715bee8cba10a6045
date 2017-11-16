@@ -1,0 +1,28 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import ronan_hanley.inside_av.Entity;
+
+/**
+ * Represents something that is fired from a weapon.
+ * Probably travels across the screen until it hits an
+ * enemy.
+ * @author Ronan
+ *
+ */
+public class Projectile extends Entity {
+	private double angle;
+	private double speed;
+	
+	public Projectile(int x, int y) {
+		super(x, y);
+	}
+	
+	public void update() {
+		/* use some trigonometry to break an angle and a speed into
+		 * it's component parts
+		 */
+		changeX(Math.cos(angle) * speed);
+		changeY(Math.sin(angle) * speed);
+	}
+	
+}

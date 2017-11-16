@@ -104,7 +104,7 @@ public class Wave {
 			
 			enemies.add(enemyToSpawn);
 			ticksSinceSpawn = 0;
-			enemiesSpawned++;
+			++enemiesSpawned;
 		}
 		
 		++ticksSinceSpawn;

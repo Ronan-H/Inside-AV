@@ -13,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import ronan_hanley.inside_av.InsideAV;
 import ronan_hanley.inside_av.Level;
 import ronan_hanley.inside_av.enemy.Enemy;
+import ronan_hanley.inside_av.weapons_systems.Projectile;
 import ronan_hanley.inside_av.weapons_systems.Tier1BulletWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Tier1LaserWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Tier1MortarWeaponSystem;
@@ -55,7 +56,7 @@ public final class PlayingState extends InsideAVState {
 		currentLevel = new Level(level);
 		enemies = new ArrayList<Enemy>();
 		weapons = new WeaponSystemGrid(InsideAV.SCREEN_TILES_X, InsideAV.SCREEN_TILES_Y);
-		weaponWheel = new Image("res/images/weapons/weapon_wheel.png");
+		weaponWheel = new Image("res/images/weapons/weapon_wheel.png", false, Image.FILTER_NEAREST);
 	}
 	
 	@Override
@@ -65,6 +66,9 @@ public final class PlayingState extends InsideAVState {
 			currentLevel.update(enemies);
 			
 			if (waveActive) {
+				// update all weapons
+				weapons.updateAll(enemies);
+				
 				// update all enemies
 				for (int i = 0; i < enemies.size(); ++i) {
 					Enemy enemy = enemies.get(i);
@@ -74,6 +78,28 @@ public final class PlayingState extends InsideAVState {
 						// remove enemy, apply damage to the computer system
 						applySystemDamage(enemy.getSystemDamage());
 						enemies.remove(i);
+					}
+					
+					// make a list of projectiles to remove later to avoid ConcurrentModificationException
+					ArrayList<Projectile> toRemove = new ArrayList<Projectile>();
+					// check for any projectile collision on this enemy
+					for (WeaponSystem weapon : weapons.getWeapons()) {
+						for (Projectile projectile : weapon.getProjectiles()) {
+							if (projectile.touchingEnemy(enemy)) {
+								boolean enemyDied = enemy.applyDamage(projectile.getDamage());
+								
+								if (enemyDied) {
+									// remove enemy
+									enemies.remove(enemy);
+									
+								}
+							}
+						}
+					}
+					
+					// remove projectiles that have hit an enemy
+					for (WeaponSystem weapon : weapons.getWeapons()) {
+						weapon.getProjectiles().removeAll(toRemove);
 					}
 				}
 			} else {
@@ -108,10 +134,21 @@ public final class PlayingState extends InsideAVState {
 				}
 			}
 			
+			// draw rectangle over info panel to hide anything underneath
+			// (eg. stray bullets)
+			g.setColor(Color.black);
+			g.fillRect(InsideAV.STATUS_PANEL_START, 0, InsideAV.STATUS_PANEL_SIZE, InsideAV.SCREEN_HEIGHT);
+			
 			// render money amount
-			final int MONEY_TEXT_SCALE = 3;
+			final int PANEL_TEXT_SCALE = 3;
+			int panelCursorY = PANEL_TEXT_SCALE;
 			InsideAV.font.drawString(String.format("Money:%.1f BTC", playerMoney),
-				InsideAV.STATUS_PANEL_START + MONEY_TEXT_SCALE, MONEY_TEXT_SCALE, Color.white, 2, false, g);
+				InsideAV.STATUS_PANEL_START + PANEL_TEXT_SCALE, panelCursorY, Color.white, 2, false, g);
+			
+			// render system health			
+			panelCursorY += InsideAV.font.getCharHeight() * PANEL_TEXT_SCALE;
+			InsideAV.font.drawString(String.format("Health:%.1f", systemHealth),
+					InsideAV.STATUS_PANEL_START + PANEL_TEXT_SCALE, panelCursorY, Color.white, 2, false, g);
 			break;
 		case Substate.TUTORIAL:
 			int rectStart = InsideAV.TILE_SIZE;

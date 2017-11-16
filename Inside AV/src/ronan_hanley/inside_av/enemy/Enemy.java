@@ -68,4 +68,15 @@ public abstract class Enemy extends DrawableEntity {
 	 */
 	public abstract double getSystemDamage();
 	
+	/**
+	 * Reduces the health of this enemy by a specified amount
+	 * @param damage Amount to reduce the health by
+	 * @return True if this enemy died as a result of the damage applied
+	 */
+	public boolean applyDamage(int damage) {
+		health -= damage;
+		
+		return (health < 0);
+	}
+	
 }

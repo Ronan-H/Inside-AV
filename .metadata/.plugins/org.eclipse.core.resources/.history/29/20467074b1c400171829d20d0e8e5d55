@@ -1,9 +1,0 @@
-package ronan_hanley.inside_av.weapons_systems;
-
-public abstract class MortarWeaponSystem extends WeaponSystem {
-
-	public MortarWeaponSystem(int x, int y, String spritePath) {
-		super(x, y, spritePath);
-	}
-
-}

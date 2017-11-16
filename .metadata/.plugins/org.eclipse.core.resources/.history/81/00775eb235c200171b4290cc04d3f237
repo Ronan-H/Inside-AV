@@ -1,5 +1,0 @@
-package ronan_hanley.inside_av.weapons_systems;
-
-public final class Tier1BulletWeaponSystem extends BulletWeaponSystem {
-
-}
