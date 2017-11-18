@@ -1,0 +1,9 @@
+package ronan_hanley.inside_av.testing;
+
+public class ObjectTest {
+	
+	public static void main(String[] args) {
+		
+	}
+	
+}

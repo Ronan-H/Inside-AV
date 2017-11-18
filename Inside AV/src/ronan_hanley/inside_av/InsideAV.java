@@ -22,6 +22,7 @@ public final class InsideAV extends StateBasedGame {
 	private static final String GAME_NAME = "Inside AV";
 	public static final int FPS = 60;
 	public static final int TILE_SIZE = 32;
+	public static final int HALF_TILE_SIZE = TILE_SIZE /2;
 	public static final int STATUS_PANEL_SIZE = TILE_SIZE * 7;
 	// Maybe doing these calculations in code is overkill
 	// 480 x 480

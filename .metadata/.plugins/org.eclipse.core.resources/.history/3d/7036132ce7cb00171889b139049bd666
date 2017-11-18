@@ -1,0 +1,86 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import org.newdawn.slick.Image;
+
+import ronan_hanley.inside_av.InsideAV;
+import ronan_hanley.inside_av.LevelRoute;
+
+public abstract class BulletWeaponSystem extends WeaponSystem {
+	public static final double COST = 100;
+	
+	public BulletWeaponSystem(int x, int y, Image sprite) {
+		super(x, y, sprite);
+	}
+	
+	@Override
+	public double getCost() {
+		return COST;
+	}
+	
+	@Override
+	public void pointTowardsTarget() {
+		if (target == null) return;
+		
+		// -- predict where the target will be --
+		
+		// first rotate the reference frame so the turret is underneath the enemy
+		double distance = Math.sqrt(Math.pow(target.getXExact() - getXExact(), 2) + Math.pow(target.getYExact() - getYExact(), 2));
+		double targetNewX = getXExact();
+		double targetNewY = getYExact() - distance;
+		double targetShiftDistance = Math.sqrt(Math.pow(targetNewX - target.getXExact(), 2) + Math.pow(targetNewY - target.getYExact(), 2));
+		
+//		System.out.println("Distance: " + distance);
+		
+		// calculate shift in angle
+		// theory: isosceles triangle with all sides known and an unkown angle
+		// (derived on paper)
+		double angleShift = 2 * Math.asin((targetShiftDistance / 2) / distance); 
+		
+//		System.out.println("Math.pow(targetShiftDistance, 2): " + Math.pow(targetShiftDistance, 2));
+		// System.out.println("Angle shift: " + angleShift);
+		
+		// find the x and y velocities (component parts) of the target
+		double enemyVelX = target.getSpeed() * LevelRoute.OFFSETS[target.getDirection()][0];
+		double enemyVelY = target.getSpeed() * LevelRoute.OFFSETS[target.getDirection()][1];
+		
+		// convert to speed and angle
+		// TODO optimize this line?
+		double enemySpeed = Math.sqrt(Math.pow(enemyVelX, 2) + Math.pow(enemyVelY, 2));
+		double enemyAngle = Math.atan2(enemyVelY, enemyVelX);
+		
+		// translate the angle
+		enemyAngle -= angleShift;
+		
+		// find the components of the translated angle and speed...
+		double enemyNewVelX = Math.cos(enemyAngle) * enemySpeed;
+		System.out.println("Enemy new vel x: " + enemyNewVelX);
+		double enemyNewVelY = Math.sin(enemyAngle) * enemySpeed;
+
+		double bulletVelX = enemyNewVelX;
+		// this line I derived on paper
+		double bulletVelY = Math.sqrt(Math.pow(getBulletSpeed(), 2) - Math.pow(bulletVelX, 2));
+//		System.out.println("Bullet vel Y : " + bulletVelY);
+		
+		// convert and angle
+		// (we already know the bullet speed)
+		double turretAngle = Math.tan(bulletVelY / bulletVelX);
+		
+		System.out.println("Turret angle 1: " + turretAngle);
+		
+		// translate the angle back to the normal reference frame
+		turretAngle += angleShift;
+		
+		System.out.println("Turret angle 2: " + turretAngle);
+		
+		setAngle(turretAngle);
+	}
+	
+	@Override
+	public void fire() {
+		// spawn a bullet
+		addProjectile(new Bullet(getX() + (InsideAV.TILE_SIZE / 2) - 2, getY() + (InsideAV.TILE_SIZE / 2) - 2, getAngle(), getBulletSpeed()));
+	}
+	
+	public abstract double getBulletSpeed();
+	
+}

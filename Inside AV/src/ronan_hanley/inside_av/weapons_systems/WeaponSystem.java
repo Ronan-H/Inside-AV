@@ -4,17 +4,14 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
-import ronan_hanley.inside_av.Entity;
 import ronan_hanley.inside_av.InsideAV;
+import ronan_hanley.inside_av.RotationalEntity;
 import ronan_hanley.inside_av.enemy.Enemy;
 
-public abstract class WeaponSystem extends Entity {
+public abstract class WeaponSystem extends RotationalEntity {
 	private Image sprite;
 	private Image ammo;
-	// angle, in radians
-	private double angle;
 	protected Enemy target = null;
 	// ticks since this weapon picked an enemy to target
 	protected int ticksSinceTarget;
@@ -29,7 +26,7 @@ public abstract class WeaponSystem extends Entity {
 	}
 	
 	public void update(ArrayList<Enemy> enemies) {
-		if (target == null || ticksSinceTarget >= getMinTargetTime()) {
+		if (target == null || target.isDead() || ticksSinceTarget >= getMinTargetTime()) {
 			// target the closest enemy
 			double shortestDistance = Double.MAX_VALUE;
 			for (Enemy enemy : enemies) {
@@ -73,21 +70,19 @@ public abstract class WeaponSystem extends Entity {
 		for (Projectile projectile : projectiles)
 			projectile.render(g);
 		
-		sprite.setRotation((float) Math.toDegrees(angle));
+		sprite.setRotation((float) Math.toDegrees(getAngle()));
 		g.drawImage(sprite, getX(), getY());
 	}
 	
-	public double getAngle() {
-		return angle;
-	}
-	
 	public void pointTowardsTarget() {
+		if (target == null) return;
+		
 		// default behaviour: just point right at the enemy, no offset
 		
 		// use inverse tan to convert 2 points into an angle
 		double opp = target.getYExact() - getYExact();
 		double adj = target.getXExact() - getXExact();
-		angle = Math.atan2(opp, adj);
+		setAngle(Math.atan2(opp, adj));
 	}
 	
 	/**

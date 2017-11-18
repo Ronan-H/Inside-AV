@@ -4,7 +4,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Bullet extends Projectile {
-public static final Image SPRITE;
+	public static final Image SPRITE;
 	
 	static {
 		Image sprite = null;
@@ -24,6 +24,16 @@ public static final Image SPRITE;
 	@Override
 	public int getDamage() {
 		return 10;
+	}
+
+	@Override
+	public int getHalfWidth() {
+		return 2;
+	}
+
+	@Override
+	public int getHalfHeight() {
+		return 2;
 	}
 
 }

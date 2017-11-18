@@ -1,0 +1,14 @@
+package ronan_hanley.inside_av;
+
+/**
+ * Represents an entity that can rotate, ie. it has
+ * an angle.
+ * @author Ronan
+ */
+public class RotationalEntity extends Entity {
+
+	public RotationalEntity(int x, int y) {
+		super(x, y);
+	}
+
+}

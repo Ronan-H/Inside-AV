@@ -18,11 +18,15 @@ public class Virus extends Enemy {
 	}
 	
 	public Virus(int x, int y, LevelRoute route) {
-		super(x, y, 1.5, 500, SPRITE, route);
+		super(x, y, 500, SPRITE, route);
 	}
 	
 	public double getSystemDamage() {
 		return 100;
+	}
+	
+	public double getSpeed() {
+		return 1.5;
 	}
 	
 }

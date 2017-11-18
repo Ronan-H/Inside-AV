@@ -18,11 +18,16 @@ public class TrackingCookie extends Enemy {
 	}
 	
 	public TrackingCookie(int x, int y, LevelRoute route) {
-		super(x, y, 3, 20, SPRITE, route);
+		super(x, y, 20, SPRITE, route);
 	}
 	
 	public double getSystemDamage() {
 		return 50;
+	}
+	
+	@Override
+	public double getSpeed() {
+		return 2.5;
 	}
 	
 }

@@ -10,19 +10,19 @@ import ronan_hanley.inside_av.LevelRouteInstruction;
 public abstract class Enemy extends DrawableEntity {
 	private int maxHealth;
 	private int health;
-	private double speed;
 	private LevelRoute route;
 	private int direction;
 	private int instructionIndex;
+	private boolean dead;
 	
-	public Enemy(int x, int y, double speed, int maxHealth, Image sprite, LevelRoute route) {
+	public Enemy(int x, int y, int maxHealth, Image sprite, LevelRoute route) {
 		super(x, y, sprite);
-		this.speed = speed;
 		this.maxHealth = maxHealth;
 		this.health = maxHealth;
 		this.route = route;
 		direction = 1;
 		instructionIndex = 0;
+		dead = false;
 	}
 	
 	/**
@@ -32,8 +32,8 @@ public abstract class Enemy extends DrawableEntity {
 	public boolean update() {
 		// update position, based on direction and speed
 		int[][] offsets = LevelRoute.OFFSETS;
-		changeX(speed * offsets[direction][0]);
-		changeY(speed * offsets[direction][1]);
+		changeX(getSpeed() * offsets[direction][0]);
+		changeY(getSpeed() * offsets[direction][1]);
 		
 		// change direction, if it's necessary
 		// check if we've reached the target location
@@ -77,6 +77,20 @@ public abstract class Enemy extends DrawableEntity {
 		health -= damage;
 		
 		return (health < 0);
+	}
+	
+	public abstract double getSpeed();
+	
+	public int getDirection() {
+		return direction;
+	}
+	
+	public boolean isDead() {
+		return dead;
+	}
+	
+	public void kill() {
+		dead = true;
 	}
 	
 }

@@ -3,8 +3,8 @@ package ronan_hanley.inside_av.weapons_systems;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-import ronan_hanley.inside_av.Entity;
 import ronan_hanley.inside_av.InsideAV;
+import ronan_hanley.inside_av.RotationalEntity;
 import ronan_hanley.inside_av.enemy.Enemy;
 
 /**
@@ -14,7 +14,7 @@ import ronan_hanley.inside_av.enemy.Enemy;
  * @author Ronan
  *
  */
-public abstract class Projectile extends Entity {
+public abstract class Projectile extends RotationalEntity {
 	private double angle;
 	private double speed;
 	private Image sprite;
@@ -35,14 +35,6 @@ public abstract class Projectile extends Entity {
 		changeY(Math.sin(getAngle()) * getSpeed());
 	}
 	
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-	
-	public double getAngle() {
-		return angle;
-	}
-	
 	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
@@ -55,6 +47,9 @@ public abstract class Projectile extends Entity {
 		g.drawImage(sprite, getX(), getY());
 	}
 	
+	public abstract int getHalfWidth();
+	public abstract int getHalfHeight();
+	
 	public boolean touchingEnemy(Enemy enemy) {
 		/* Simplifying an enemy to be a circle. This is drastically faster
 		 * than pixel perfect collision detection, as we simply check if the distance
@@ -63,16 +58,12 @@ public abstract class Projectile extends Entity {
 		 * The circle's diameter is 1 game tile long.
 		 */
 		
-		int halfWidth = sprite.getWidth() / 2;
-		int halfHeight = sprite.getHeight() / 2;
-		int halfTileSize = InsideAV.TILE_SIZE / 2;
-		
 		// pythagorean theorem for distance
 		int distance = (int) Math.sqrt(
-			Math.pow((getXExact() + halfWidth) - (enemy.getXExact() + halfTileSize), 2)
-		  + Math.pow((getYExact() + halfHeight) - (enemy.getYExact() + halfTileSize), 2));
+			Math.pow((getXExact() + getHalfWidth()) - (enemy.getXExact() + InsideAV.HALF_TILE_SIZE), 2)
+		  + Math.pow((getYExact() + getHalfHeight()) - (enemy.getYExact() + InsideAV.HALF_TILE_SIZE), 2));
 		
-		boolean colliding = (distance < halfTileSize + halfHeight);
+		boolean colliding = (distance < InsideAV.HALF_TILE_SIZE + getHalfHeight());
 		
 		return colliding;
 	}

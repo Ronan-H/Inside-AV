@@ -18,11 +18,16 @@ public class Rootkit extends Enemy {
 	}
 	
 	public Rootkit(int x, int y, LevelRoute route) {
-		super(x, y, 1.0, 1000, SPRITE, route);
+		super(x, y, 1000, SPRITE, route);
 	}
 	
 	public double getSystemDamage() {
 		return 300;
+	}
+	
+	@Override
+	public double getSpeed() {
+		return 1;
 	}
 	
 }

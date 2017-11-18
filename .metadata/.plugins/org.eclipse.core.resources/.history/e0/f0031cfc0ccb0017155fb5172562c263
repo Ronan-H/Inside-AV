@@ -1,0 +1,20 @@
+package ronan_hanley.inside_av.testing;
+
+/**
+ * This class is used to measure the efficiency of the collision
+ * detection between the projectiles and the enemies, as if it is
+ * too slow, the overhead can be huge and the game can slow down.
+ * 
+ * (When you're comparing every PROJECTILE on screen to every
+ * ENEMY on screen, every TICK (1/60 of a second), maybe this
+ * slow down is not so surprising!)
+ * @author Ronan
+ *
+ */
+public class CollisionDetectionBenchmark {
+	
+	public static void main(String[] args) {
+		
+	}
+	
+}

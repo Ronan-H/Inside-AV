@@ -18,7 +18,8 @@ import ronan_hanley.inside_av.enemy.Virus;
  * @author Ronan
  */
 public class Wave {
-	private int[][] info;
+	private int[] enemyIDs;
+	private double[] spawnTimes;
 	private LevelRoute levelRoute;
 	private int ticksSinceSpawn;
 	private int enemiesSpawned;
@@ -28,20 +29,17 @@ public class Wave {
 		this.levelRoute = levelRoute;
 		
 		// Store the info in an ArrayList first, as we don't know how much info there is
-		ArrayList<ArrayList<Integer>> infoList = new ArrayList<ArrayList<Integer>>();
+		ArrayList<Double> spawnTimesList = new ArrayList<Double>();
+		ArrayList<Integer> enemyIDList = new ArrayList<Integer>();
 		
 		try {
 			BufferedReader waveInfoIn = new BufferedReader(new FileReader(infoPath));
 			
 			while (waveInfoIn.ready()) {
-				ArrayList<Integer> lineList = new ArrayList<Integer>();
-				
 				StringTokenizer st = new StringTokenizer(waveInfoIn.readLine());
-				while (st.hasMoreTokens()) {
-					lineList.add(Integer.parseInt(st.nextToken()));
-				}
 				
-				infoList.add(lineList);
+				spawnTimesList.add(Double.parseDouble(st.nextToken()));
+				enemyIDList.add(Integer.parseInt(st.nextToken()));
 			}
 			
 			waveInfoIn.close();
@@ -50,17 +48,20 @@ public class Wave {
 		}
 		
 		// convert list to array
-		info = new int[infoList.size()][2];
+		enemyIDs = new int[enemyIDList.size()];
+		spawnTimes = new double[spawnTimesList.size()];
 		
-		for (int i = 0; i < infoList.size(); ++i) {
-			for (int j = 0; j < infoList.get(i).size(); ++j) {
-				info[i][j] = infoList.get(i).get(j);
-			}
+		for (int i = 0; i < spawnTimesList.size(); ++i) {
+			spawnTimes[i] = spawnTimesList.get(i);
+		}
+		
+		for (int i = 0; i < enemyIDList.size(); ++i) {
+			enemyIDs[i] = enemyIDList.get(i);
 		}
 		
 		// convert seconds to game ticks
-		for (int i = 0; i < info.length; ++i) {
-			info[i][0] *= InsideAV.FPS;
+		for (int i = 0; i < spawnTimes.length; ++i) {
+			spawnTimes[i] *= InsideAV.FPS;
 		}
 		
 		ticksSinceSpawn = enemiesSpawned = 0;
@@ -87,10 +88,15 @@ public class Wave {
 	 * @boolean wave finished?
 	 */
 	public boolean updateWave(ArrayList<Enemy> enemies) {
-		if (ticksSinceSpawn >= info[enemiesSpawned][0]) {
+		if (enemiesSpawned >= spawnTimes.length) {
+			// all enemies already spawned
+			return true;
+		}
+		
+		if (ticksSinceSpawn >= spawnTimes[enemiesSpawned]) {
 			Enemy enemyToSpawn = null;
 			
-			switch (info[enemiesSpawned][1]) {
+			switch (enemyIDs[enemiesSpawned]) {
 			case 0:
 				enemyToSpawn = new TrackingCookie(spawnX, spawnY, levelRoute);
 				break;
@@ -109,7 +115,7 @@ public class Wave {
 		
 		++ticksSinceSpawn;
 		
-		return (enemiesSpawned >= info.length);
+		return (enemiesSpawned >= enemyIDs.length);
 	}
 	
 }

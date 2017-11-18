@@ -1,0 +1,13 @@
+package ronan_hanley.inside_av.testing;
+
+public class ObjectTest {
+	
+	public static void main(String[] args) {
+		Object test = new Object();
+		Object test2 = test;
+		test2 = null;
+		
+		System.out.println("Test is null? " + (test == null));
+	}
+	
+}

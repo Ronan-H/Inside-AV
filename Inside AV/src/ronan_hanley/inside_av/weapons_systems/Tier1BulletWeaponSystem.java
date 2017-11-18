@@ -27,7 +27,7 @@ public final class Tier1BulletWeaponSystem extends BulletWeaponSystem {
 
 	@Override
 	public double getBulletSpeed() {
-		return 3;
+		return 3.5;
 	}
 	
 }

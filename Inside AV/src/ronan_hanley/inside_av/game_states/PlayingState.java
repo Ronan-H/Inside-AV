@@ -26,7 +26,6 @@ public final class PlayingState extends InsideAVState {
 	private int level;
 	private Level currentLevel;
 	private ArrayList<Enemy> enemies;
-	private boolean waveActive = false;
 	// The player's money. Currency is bitcoin.
 	private double playerMoney;
 	/* The health of the computer system; enemies apply damage when
@@ -52,7 +51,7 @@ public final class PlayingState extends InsideAVState {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		substate = Substate.TUTORIAL;
 		level =	1;
-		playerMoney = 100;
+		playerMoney = 10000;
 		currentLevel = new Level(level);
 		enemies = new ArrayList<Enemy>();
 		weapons = new WeaponSystemGrid(InsideAV.SCREEN_TILES_X, InsideAV.SCREEN_TILES_Y);
@@ -65,11 +64,12 @@ public final class PlayingState extends InsideAVState {
 		case Substate.PLAYING:
 			currentLevel.update(enemies);
 			
-			if (waveActive) {
+			if (currentLevel.isWaveActive()) {
 				// update all weapons
 				weapons.updateAll(enemies);
 				
 				// update all enemies
+				enemyLoop:
 				for (int i = 0; i < enemies.size(); ++i) {
 					Enemy enemy = enemies.get(i);
 					boolean enemyReachedEnd = enemy.update();
@@ -77,21 +77,28 @@ public final class PlayingState extends InsideAVState {
 					if (enemyReachedEnd) {
 						// remove enemy, apply damage to the computer system
 						applySystemDamage(enemy.getSystemDamage());
+						enemy.kill();
 						enemies.remove(i);
+						--i;
+						continue enemyLoop;
 					}
 					
 					// make a list of projectiles to remove later to avoid ConcurrentModificationException
 					ArrayList<Projectile> toRemove = new ArrayList<Projectile>();
 					// check for any projectile collision on this enemy
+					weaponLoop:
 					for (WeaponSystem weapon : weapons.getWeapons()) {
 						for (Projectile projectile : weapon.getProjectiles()) {
 							if (projectile.touchingEnemy(enemy)) {
+								toRemove.add(projectile);
 								boolean enemyDied = enemy.applyDamage(projectile.getDamage());
 								
 								if (enemyDied) {
 									// remove enemy
-									enemies.remove(enemy);
-									
+									enemy.kill();
+									enemies.remove(i);
+									enemy = null;
+									break weaponLoop;
 								}
 							}
 						}
@@ -123,7 +130,7 @@ public final class PlayingState extends InsideAVState {
 			// render weapons
 			weapons.renderAll(g);
 			
-			if (waveActive) {
+			if (currentLevel.isWaveActive()) {
 				// render all enemies
 				for (Enemy enemy : enemies)
 					enemy.render(g);
@@ -246,10 +253,10 @@ public final class PlayingState extends InsideAVState {
 			switch (key) {
 			case Input.KEY_SPACE:
 				// start the next wave, if it can be started
-				if (!waveActive) {
+				if (!currentLevel.isWaveActive()) {
 					// TODO fill out this bit. Load the next wave.
 					
-					waveActive = true;
+					currentLevel.setWaveActive(true);
 				}
 				break;
 			}
