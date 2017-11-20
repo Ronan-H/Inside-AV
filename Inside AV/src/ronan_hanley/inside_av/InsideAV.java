@@ -28,9 +28,12 @@ public final class InsideAV extends StateBasedGame {
 	// 480 x 480
 	public static final int SCREEN_TILES_X = 15;
 	public static final int SCREEN_TILES_Y = 15;
-	public static final int SCREEN_WIDTH = SCREEN_TILES_X * TILE_SIZE + STATUS_PANEL_SIZE;
-	public static final int SCREEN_HEIGHT = SCREEN_TILES_Y * TILE_SIZE;
+	public static final int GAME_SCREEN_WIDTH = SCREEN_TILES_X * TILE_SIZE;
+	public static final int SCREEN_WIDTH = GAME_SCREEN_WIDTH + STATUS_PANEL_SIZE;
+	public static final int SCREEN_HEIGHT = SCREEN_TILES_Y * TILE_SIZE; 
 	public static final int STATUS_PANEL_START = SCREEN_WIDTH - STATUS_PANEL_SIZE;
+	// debug mode (diplays some useful figures/collision boxes/etc)
+	public static final boolean DEBUG = true;
 	public static int screenScale;
 	
 	public static ImageFont font;
@@ -86,6 +89,7 @@ public final class InsideAV extends StateBasedGame {
             app.setMaximumLogicUpdateInterval(LOGIC_INTERVAL);
             app.setMaximumLogicUpdateInterval(LOGIC_INTERVAL);
             app.setVSync(true);
+            app.setAlwaysRender(true);
             app.start();
         } catch(SlickException e) {
             e.printStackTrace();

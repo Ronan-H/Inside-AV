@@ -21,6 +21,8 @@ public abstract class RocketWeaponSystem extends WeaponSystem {
 		// fires one rocket.
 		// subclasses can call this method multiple times.
 		addProjectile(new Rocket(getX() + InsideAV.HALF_TILE_SIZE, getY() + InsideAV.HALF_TILE_SIZE, 0.2, this));
+		
+		playShootSound();
 	}
 	
 }

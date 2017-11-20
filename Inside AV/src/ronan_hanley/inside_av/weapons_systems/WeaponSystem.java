@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Sound;
 
 import ronan_hanley.inside_av.InsideAV;
 import ronan_hanley.inside_av.RotationalEntity;
@@ -53,7 +54,7 @@ public abstract class WeaponSystem extends RotationalEntity {
 		++ticksSinceTarget;
 		
 		// fire this weapon if it's time to
-		if (ticksSinceFire > getFireInterval() && target != null) {
+		if (ticksSinceFire > getFireInterval() && target != null && !target.isDead()) {
 			fire();
 			ticksSinceFire = 0;
 		} else {
@@ -112,6 +113,12 @@ public abstract class WeaponSystem extends RotationalEntity {
 	
 	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
+	}
+	
+	protected abstract Sound getShootSound();
+	
+	public void playShootSound() {
+		getShootSound().play(1f, 0.04f);
 	}
 	
 }

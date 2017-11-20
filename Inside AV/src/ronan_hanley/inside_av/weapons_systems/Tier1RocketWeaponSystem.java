@@ -2,11 +2,13 @@ package ronan_hanley.inside_av.weapons_systems;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 import ronan_hanley.inside_av.InsideAV;
 
 public class Tier1RocketWeaponSystem extends RocketWeaponSystem {
-	public static final Image SPRITE;
+	private static final Image SPRITE;
+	private static final Sound SHOOT_SOUND;
 	
 	static {
 		Image sprite = null;
@@ -17,6 +19,14 @@ public class Tier1RocketWeaponSystem extends RocketWeaponSystem {
 		}
 		
 		SPRITE = sprite;
+		
+		Sound sound = null;
+		try {
+			sound = new Sound("res/sound/sfx/rocket_shoot.ogg");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		SHOOT_SOUND = sound;
 	}
 	
 	public Tier1RocketWeaponSystem(int x, int y) {
@@ -25,6 +35,11 @@ public class Tier1RocketWeaponSystem extends RocketWeaponSystem {
 	
 	public int getFireInterval() {
 		return 3 * InsideAV.FPS;
+	}
+
+	@Override
+	protected Sound getShootSound() {
+		return SHOOT_SOUND;
 	}
 	
 }

@@ -15,8 +15,10 @@ public final class Level {
 	private LevelRoute route;
 	private Wave[] waves;
 	private int currentWave;
-	// True if enemies are being spawned
+	// true if enemies are being spawned
 	private boolean waveActive = false;
+	// game ticks since this wave started
+	private int waveTimer = 0;
 	
 	public Level(int levelNumber) {
 		route = new LevelRoute(levelNumber);
@@ -48,9 +50,11 @@ public final class Level {
 			boolean lastEnemy = waves[currentWave].updateWave(enemies);
 			
 			if (lastEnemy && enemies.size() == 0) {
-				waveActive = false;
+				setWaveActive(false);
 				++currentWave;
 			}
+			
+			++waveTimer;
 		}
 	}
 	
@@ -76,6 +80,10 @@ public final class Level {
 	
 	public boolean solidAt(int x, int y) {
 		return route.solidAt(x, y);
+	}
+	
+	public int getWaveTimer() {
+		return waveTimer;
 	}
 	
 }

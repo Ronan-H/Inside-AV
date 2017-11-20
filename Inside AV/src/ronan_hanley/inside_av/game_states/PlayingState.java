@@ -10,10 +10,12 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import ronan_hanley.inside_av.Explosion;
 import ronan_hanley.inside_av.InsideAV;
 import ronan_hanley.inside_av.Level;
 import ronan_hanley.inside_av.enemy.Enemy;
 import ronan_hanley.inside_av.weapons_systems.Projectile;
+import ronan_hanley.inside_av.weapons_systems.Rocket;
 import ronan_hanley.inside_av.weapons_systems.Tier1BulletWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Tier1LaserWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Tier1MortarWeaponSystem;
@@ -51,7 +53,8 @@ public final class PlayingState extends InsideAVState {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		substate = Substate.TUTORIAL;
 		level =	1;
-		playerMoney = 10000;
+		playerMoney = 150;
+		playerMoney += 10000;
 		currentLevel = new Level(level);
 		enemies = new ArrayList<Enemy>();
 		weapons = new WeaponSystemGrid(InsideAV.SCREEN_TILES_X, InsideAV.SCREEN_TILES_Y);
@@ -90,27 +93,54 @@ public final class PlayingState extends InsideAVState {
 					for (WeaponSystem weapon : weapons.getWeapons()) {
 						for (Projectile projectile : weapon.getProjectiles()) {
 							if (projectile.touchingEnemy(enemy)) {
-								toRemove.add(projectile);
-								boolean enemyDied = enemy.applyDamage(projectile.getDamage());
-								
-								if (enemyDied) {
-									// remove enemy
-									enemy.kill();
-									enemies.remove(i);
-									enemy = null;
-									break weaponLoop;
+								if (projectile instanceof Rocket) {
+									// create an explosion
+									Explosion explosion = new Explosion(projectile.getX(), projectile.getY(),
+																		projectile.getDamage(), InsideAV.TILE_SIZE * 4);
+									
+									// apply damage to all enemies
+									for (Enemy enemy2 : enemies) {
+										explosion.damageEnemy(enemy2);
+									}
 								}
+								
+								toRemove.add(projectile);
+								enemy.applyDamage(projectile.getDamage());
+								if (enemy.isDead()) break weaponLoop;
 							}
 						}
 					}
-					
 					// remove projectiles that have hit an enemy
 					for (WeaponSystem weapon : weapons.getWeapons()) {
 						weapon.getProjectiles().removeAll(toRemove);
 					}
 				}
+				
+				// remove dead enemies
+				for (int i = 0; i < enemies.size(); ++i) {
+					Enemy enemy = enemies.get(i);
+					if (enemy.isDead()) {
+						// award the player the kill reward
+						playerMoney += enemy.getKillReward();
+						
+						// remove enemy
+						enemy.kill();
+						enemies.remove(i);
+						--i;
+						enemy = null;
+					}
+				}
 			} else {
 				// wave not active
+				
+				/* remove all projectiles, if there are any
+				 * (clean up the previous wave)
+				 */
+				for (WeaponSystem weapon : weapons.getWeapons()) {
+					while (weapon.getProjectiles().size() > 0) {
+						weapon.getProjectiles().remove(weapon.getProjectiles().size() - 1);
+					}
+				}
 			}
 			break;
 		case Substate.TUTORIAL:
@@ -156,6 +186,11 @@ public final class PlayingState extends InsideAVState {
 			panelCursorY += InsideAV.font.getCharHeight() * PANEL_TEXT_SCALE;
 			InsideAV.font.drawString(String.format("Health:%.1f", systemHealth),
 					InsideAV.STATUS_PANEL_START + PANEL_TEXT_SCALE, panelCursorY, Color.white, 2, false, g);
+			
+			// render wave started text if necessary
+			if (currentLevel.isWaveActive() && currentLevel.getWaveTimer() < (3 * InsideAV.FPS)) {
+				InsideAV.font.drawString("Malware payload incoming!!", InsideAV.SCREEN_WIDTH / 2, InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 2, Color.red, 4, true, g);
+			}
 			break;
 		case Substate.TUTORIAL:
 			int rectStart = InsideAV.TILE_SIZE;
@@ -254,8 +289,6 @@ public final class PlayingState extends InsideAVState {
 			case Input.KEY_SPACE:
 				// start the next wave, if it can be started
 				if (!currentLevel.isWaveActive()) {
-					// TODO fill out this bit. Load the next wave.
-					
 					currentLevel.setWaveActive(true);
 				}
 				break;

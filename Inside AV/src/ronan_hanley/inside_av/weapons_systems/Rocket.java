@@ -72,7 +72,7 @@ public class Rocket extends Projectile {
 	
 	@Override
 	public int getDamage() {
-		return 30;
+		return 80;
 	}
 
 	@Override

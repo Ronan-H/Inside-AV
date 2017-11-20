@@ -1,0 +1,30 @@
+package ronan_hanley.inside_av;
+
+import ronan_hanley.inside_av.enemy.Enemy;
+
+public class Explosion {
+	private double maxDamage;
+	private double radius;
+	
+	/**
+	 * Creates an explosion using two values.
+	 * @param maxDamage The damage taken at the exact center
+	 * of the explosion.
+	 * @param radius The redius of the explosion. Zero damage
+	 * will be taken at a distance of radius from the explosion.
+	 */
+	public Explosion(double maxDamage, double radius) {
+		this.maxDamage = maxDamage;
+		this.radius = radius;
+	}
+	
+	/**
+	 * Damages an enemy based off this explosion.
+	 * @param enemy The enemy to damage.
+	 * @return True if the enemy died in this explosion;
+	 */
+	public boolean damageEnemy(Enemy enemy) {
+		
+	}
+	
+}

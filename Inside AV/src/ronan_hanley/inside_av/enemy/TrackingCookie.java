@@ -29,5 +29,10 @@ public class TrackingCookie extends Enemy {
 	public double getSpeed() {
 		return 2.5;
 	}
+
+	@Override
+	public double getKillReward() {
+		return 20;
+	}
 	
 }

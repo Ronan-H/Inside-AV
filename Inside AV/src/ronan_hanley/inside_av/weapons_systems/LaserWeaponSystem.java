@@ -17,6 +17,8 @@ public abstract class LaserWeaponSystem extends WeaponSystem {
 	@Override
 	public void fire() {
 		// TODO this method
+		
+		// playShootSound();
 	}
 	
 }

@@ -18,4 +18,9 @@ public class BenchmarkEnemy extends Enemy {
 		return 0;
 	}
 
+	@Override
+	public double getKillReward() {
+		return 0;
+	}
+
 }

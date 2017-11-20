@@ -1,5 +1,7 @@
 package ronan_hanley.inside_av.enemy;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import ronan_hanley.inside_av.DrawableEntity;
@@ -61,6 +63,15 @@ public abstract class Enemy extends DrawableEntity {
 		return false;
 	}
 	
+	public void render(Graphics g) {
+		super.render(g);
+		
+		if (InsideAV.DEBUG) {
+			// display health
+			InsideAV.font.drawString(Integer.toString(health), getX(), getY() - 15, Color.white, 2, false, g);
+		}
+	}
+	
 	/**
 	 * 
 	 * @return How much damage this enemy will apply to the system if it reaches
@@ -76,7 +87,11 @@ public abstract class Enemy extends DrawableEntity {
 	public boolean applyDamage(int damage) {
 		health -= damage;
 		
-		return (health < 0);
+		if (health < 0) {
+			kill();
+		}
+		
+		return dead;
 	}
 	
 	public abstract double getSpeed();
@@ -92,5 +107,11 @@ public abstract class Enemy extends DrawableEntity {
 	public void kill() {
 		dead = true;
 	}
+	
+	/**
+	 * @return How much money the player is rewarded with
+	 * when this enemy is killed
+	 */
+	public abstract double getKillReward();
 	
 }

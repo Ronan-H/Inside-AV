@@ -81,6 +81,8 @@ public abstract class BulletWeaponSystem extends WeaponSystem {
 	public void fire() {
 		// spawn a bullet
 		addProjectile(new Bullet(getX() + (InsideAV.TILE_SIZE / 2) - 2, getY() + (InsideAV.TILE_SIZE / 2) - 2, getAngle(), getBulletSpeed()));
+		
+		playShootSound();
 	}
 	
 	public abstract double getBulletSpeed();

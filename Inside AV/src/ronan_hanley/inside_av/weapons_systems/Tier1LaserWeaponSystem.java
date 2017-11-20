@@ -2,9 +2,11 @@ package ronan_hanley.inside_av.weapons_systems;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public final class Tier1LaserWeaponSystem extends LaserWeaponSystem {
-	public static final Image SPRITE;
+	private static final Image SPRITE;
+	private static final Sound SHOOT_SOUND;
 	
 	static {
 		Image sprite = null;
@@ -15,6 +17,14 @@ public final class Tier1LaserWeaponSystem extends LaserWeaponSystem {
 		}
 		
 		SPRITE = sprite;
+		
+		Sound sound = null;
+		try {
+			sound = new Sound("res/sound/sfx/laser_shoot.ogg");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		SHOOT_SOUND = sound;
 	}
 	
 	public Tier1LaserWeaponSystem(int x, int y) {
@@ -24,6 +34,11 @@ public final class Tier1LaserWeaponSystem extends LaserWeaponSystem {
 	@Override
 	public int getFireInterval() {
 		return 0;
+	}
+
+	@Override
+	protected Sound getShootSound() {
+		return SHOOT_SOUND;
 	}
 	
 }

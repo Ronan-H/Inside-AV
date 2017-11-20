@@ -18,7 +18,7 @@ public class Virus extends Enemy {
 	}
 	
 	public Virus(int x, int y, LevelRoute route) {
-		super(x, y, 500, SPRITE, route);
+		super(x, y, 200, SPRITE, route);
 	}
 	
 	public double getSystemDamage() {
@@ -27,6 +27,11 @@ public class Virus extends Enemy {
 	
 	public double getSpeed() {
 		return 1.5;
+	}
+
+	@Override
+	public double getKillReward() {
+		return 150;
 	}
 	
 }

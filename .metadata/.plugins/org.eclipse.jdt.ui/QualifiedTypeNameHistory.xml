@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.awt.Toolkit"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="java.lang.IndexOutOfBoundsException"/>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.LevelRoute.LevelRouteInstruction"/>
@@ -10,15 +9,16 @@
 <fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.WeaponSystemGrid"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.BulletWeaponSystem"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Graphics"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.Entity"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Projectile"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.enemy.Enemy"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.testing.BenchmarkEnemy"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.testing.BenchmarkProjectile"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.RocketWeaponSystem"/>
-<fullyQualifiedTypeName name="ronan_hanley.inside_av.InsideAV"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.LevelRoute"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Graphics"/>
+<fullyQualifiedTypeName name="ronan_hanley.inside_av.InsideAV"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
 </qualifiedTypeNameHistroy>

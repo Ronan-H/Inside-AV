@@ -29,5 +29,10 @@ public class Rootkit extends Enemy {
 	public double getSpeed() {
 		return 1;
 	}
+
+	@Override
+	public double getKillReward() {
+		return 250;
+	}
 	
 }
