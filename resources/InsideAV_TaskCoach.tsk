@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?taskcoach release="1.4.3" tskversion="37"?>
+
+<tasks>
+<task creationDateTime="2017-11-25 17:21:07.603000" expandedContexts="('taskviewer',)" id="0609462e-d205-11e7-98e1-1c1b0de4e626" modificationDateTime="2017-11-25 17:21:19.526000" status="1" subject="Add particle effects">
+<task creationDateTime="2017-11-25 17:21:13.418000" id="0980929e-d205-11e7-95b9-1c1b0de4e626" modificationDateTime="2017-11-25 17:21:17.449000" status="1" subject="Add explosion particle effects" />
+<task creationDateTime="2017-11-25 17:21:19.525000" id="0d246d51-d205-11e7-8df1-1c1b0de4e626" modificationDateTime="2017-11-25 17:21:26.079000" status="1" subject="Add rocket projectile particle effects" />
+</task>
+<task creationDateTime="2017-11-25 17:14:10.801000" id="0d9a5611-d204-11e7-83d9-1c1b0de4e626" modificationDateTime="2017-11-25 17:15:05.762000" status="1" subject="Add game over" />
+<task creationDateTime="2017-11-25 17:15:09.212000" expandedContexts="('taskviewer',)" id="306b25c0-d204-11e7-b6aa-1c1b0de4e626" modificationDateTime="2017-11-25 17:15:54.660000" status="1" subject="Implement all weapons">
+<task creationDateTime="2017-11-25 17:15:29.226000" id="3c590aa1-d204-11e7-983c-1c1b0de4e626" modificationDateTime="2017-11-25 17:15:37.986000" status="1" subject="Add laser weapon" />
+<task creationDateTime="2017-11-25 17:15:54.659000" id="4b81cf2e-d204-11e7-bade-1c1b0de4e626" modificationDateTime="2017-11-25 17:15:58.709000" status="1" subject="Add mortar weapon" />
+</task>
+<task actualstartdate="2017-11-25 18:35:37.661000" completiondate="2017-11-25 19:38:02.454000" creationDateTime="2017-11-25 17:16:43.519000" id="68a140f0-d204-11e7-82c9-1c1b0de4e626" modificationDateTime="2017-11-25 19:38:02.454000" percentageComplete="100" status="1" subject="Fix menu background" />
+<task creationDateTime="2017-11-25 17:16:55.683000" expandedContexts="('taskviewer',)" id="6fe15530-d204-11e7-9aa3-1c1b0de4e626" modificationDateTime="2017-11-25 17:18:10.997000" status="1" subject="Add weapon upgrades">
+<task creationDateTime="2017-11-25 17:17:04.971000" id="756a91b0-d204-11e7-a625-1c1b0de4e626" modificationDateTime="2017-11-25 17:17:55.990000" status="1" subject="Add upgrade functionality (i.e. click weapon then click &quot;upgrade&quot; to upgrade)" />
+<task creationDateTime="2017-11-25 17:18:10.997000" expandedContexts="('taskviewer',)" id="9cc5564f-d204-11e7-afe1-1c1b0de4e626" modificationDateTime="2017-11-25 17:18:51.088000" status="1" subject="Add upgrade tier classes">
+<task creationDateTime="2017-11-25 17:18:28.990000" id="a77ed9e1-d204-11e7-83eb-1c1b0de4e626" modificationDateTime="2017-11-25 17:18:35.928000" status="1" subject="Add bullet weapon tier classes" />
+<task creationDateTime="2017-11-25 17:18:38.618000" id="ad3bf7a1-d204-11e7-a029-1c1b0de4e626" modificationDateTime="2017-11-25 17:18:43.265000" status="1" subject="Add laser weapon tier classes" />
+<task creationDateTime="2017-11-25 17:18:44.975000" id="b105f7ee-d204-11e7-89d5-1c1b0de4e626" modificationDateTime="2017-11-25 17:18:48.698000" status="1" subject="Add mortar weapon tier classes" />
+<task creationDateTime="2017-11-25 17:18:51.088000" id="b4aabd00-d204-11e7-83e1-1c1b0de4e626" modificationDateTime="2017-11-25 17:18:55.916000" status="1" subject="Add rocket weapon tier classes" />
+</task>
+</task>
+<task creationDateTime="2017-11-25 17:19:07.443000" expandedContexts="('taskviewer',)" id="be6a5030-d204-11e7-b82a-1c1b0de4e626" modificationDateTime="2017-11-25 17:20:36.586000" status="1" subject="Add more levels">
+<task creationDateTime="2017-11-25 17:19:12.681000" id="c189918f-d204-11e7-a30b-1c1b0de4e626" modificationDateTime="2017-11-25 17:19:18.893000" status="1" subject="Add level switching" />
+<task creationDateTime="2017-11-25 17:20:36.586000" id="f38c749e-d204-11e7-bb44-1c1b0de4e626" modificationDateTime="2017-11-25 17:20:45.339000" status="1" subject="Create levels 2 + 3 and their waves" />
+</task>
+<syncmlconfig>
+<TaskCoach-0000015ff42c02156940e0cc00c000a80000001a>
+<spds>
+<sources>
+<TaskCoach-0000015ff42c02156940e0cc00c000a80000001a.Tasks />
+<TaskCoach-0000015ff42c02156940e0cc00c000a80000001a.Notes />
+</sources>
+<syncml>
+<Auth />
+<Conn />
+</syncml>
+</spds>
+</TaskCoach-0000015ff42c02156940e0cc00c000a80000001a>
+</syncmlconfig>
+<guid>
+0000015ff42c02156940e0cc00c000a80000001a
+</guid>
+</tasks>

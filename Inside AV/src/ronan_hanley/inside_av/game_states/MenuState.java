@@ -29,7 +29,7 @@ public final class MenuState extends InsideAVState {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		background = new Image("res/images/menu_background.png");
 		String[] buttonLabels = {"Play", "Level Select", "Exit"};
-		menuButtons = new ButtonSet(buttonLabels, 27, (InsideAV.font.getCharHeight() + 2) * TITLE_SCALE, 300, 40, new Color(150, 20, 0), new Color(220, 25, 0), 15);
+		menuButtons = new ButtonSet(buttonLabels, InsideAV.SCREEN_WIDTH / 2 - 150, (InsideAV.font.getCharHeight() + 4) * TITLE_SCALE, 300, 40, Color.black, Color.green, 15);
 		// Slick2d can't handle a very very small OGG filesize
 		// So some very quiet random noise was added to the end of te sound effect...
 		menuSelectSound = new Sound("res/sound/sfx/menu_select.ogg");

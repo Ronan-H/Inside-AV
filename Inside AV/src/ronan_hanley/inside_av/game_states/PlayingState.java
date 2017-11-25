@@ -39,10 +39,10 @@ public final class PlayingState extends InsideAVState {
 	private boolean selectingWeapon = false;
 	private int weaponWheelX, weaponWheelY;
 	private static final String[] TUTORIAL_TEXT =  
-		{"- Stop the enemies from\nreaching the end",
-	     "- Click a tile to place\na weapon system there",
-	     "- Press space to\nstart the next wave",
-	     "- Good luck! (press\nenter to close this tutorial)"};
+		{"Stop the enemies from reaching the\nend",
+	     "Click a tile to place a weapon\nsystem there",
+	     "Press space to start the next wave",
+	     "Good luck!\n\n(press enter to close this tutorial)"};
 	private WeaponSystemGrid weapons;
 	
 	public PlayingState(StateBasedGame sbg) {
@@ -54,7 +54,11 @@ public final class PlayingState extends InsideAVState {
 		substate = Substate.TUTORIAL;
 		level =	1;
 		playerMoney = 150;
-		playerMoney += 10000;
+		
+		if (InsideAV.DEBUG) {
+			playerMoney += 10000;
+		}
+		
 		currentLevel = new Level(level);
 		enemies = new ArrayList<Enemy>();
 		weapons = new WeaponSystemGrid(InsideAV.SCREEN_TILES_X, InsideAV.SCREEN_TILES_Y);
@@ -193,17 +197,14 @@ public final class PlayingState extends InsideAVState {
 			}
 			break;
 		case Substate.TUTORIAL:
-			int rectStart = InsideAV.TILE_SIZE;
-			int rectWidth = InsideAV.SCREEN_WIDTH - (rectStart * 2);
-			int rectHeight = InsideAV.SCREEN_HEIGHT - (rectStart * 2);
-			g.setColor(Color.white);
-			g.fillRect(rectStart, rectStart, rectWidth, rectHeight);
+			g.setColor(Color.black);
+			g.fillRect(0, 0, InsideAV.SCREEN_WIDTH, InsideAV.SCREEN_HEIGHT);
 			
 			final int TUT_TEXT_SCALE = 3;
-			int cursorX = rectStart + 2;
-			int cursorY = rectStart + 2;
+			int cursorX = InsideAV.TILE_SIZE + 2;
+			int cursorY = InsideAV.TILE_SIZE + 2;
 			for (int i = 0; i < TUTORIAL_TEXT.length; ++i) {
-				InsideAV.font.drawString(TUTORIAL_TEXT[i], cursorX, cursorY, Color.black, TUT_TEXT_SCALE, false, g);
+				InsideAV.font.drawString(TUTORIAL_TEXT[i], cursorX, cursorY, Color.green, TUT_TEXT_SCALE, false, g);
 				cursorY += (TUT_TEXT_SCALE * InsideAV.font.getCharHeight()) * 3;
 			}
 			break;
