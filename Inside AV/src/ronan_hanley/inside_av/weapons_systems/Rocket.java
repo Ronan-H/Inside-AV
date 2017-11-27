@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 
 import ronan_hanley.inside_av.enemy.Enemy;
 
-public class Rocket extends Projectile {
+public final class Rocket extends Projectile {
 	public static final Image SPRITE;
 	private Random random;
 	// turning speed, in radians per tick
@@ -72,7 +72,7 @@ public class Rocket extends Projectile {
 	
 	@Override
 	public int getDamage() {
-		return 80;
+		return 50;
 	}
 
 	@Override

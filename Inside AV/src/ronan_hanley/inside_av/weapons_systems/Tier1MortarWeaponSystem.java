@@ -1,10 +1,13 @@
 package ronan_hanley.inside_av.weapons_systems;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
 import ronan_hanley.inside_av.InsideAV;
+import ronan_hanley.inside_av.enemy.Enemy;
 
 public final class Tier1MortarWeaponSystem extends MortarWeaponSystem {
 	private static final Image SPRITE;
@@ -29,12 +32,13 @@ public final class Tier1MortarWeaponSystem extends MortarWeaponSystem {
 		SHOOT_SOUND = sound;
 	}
 	
-	public Tier1MortarWeaponSystem(int x, int y) {
-		super(x, y, SPRITE);
+	public Tier1MortarWeaponSystem(int x, int y, ArrayList<Enemy> enemies) {
+		super(x, y, SPRITE, enemies);
 	}
 	
 	public int getFireInterval() {
-		return 5 * InsideAV.FPS;
+		// TODO Change back to 5
+		return 1 * InsideAV.FPS;
 	}
 
 	@Override

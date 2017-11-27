@@ -1,0 +1,40 @@
+package ronan_hanley.inside_av.weapons_systems;
+
+import java.util.ArrayList;
+
+import org.newdawn.slick.Image;
+
+import ronan_hanley.inside_av.enemy.Enemy;
+
+public abstract class MortarWeaponSystem extends WeaponSystem {
+	public static final double COST = 300;
+	private ArrayList<Enemy> enemies;
+	
+	public MortarWeaponSystem(int x, int y, Image sprite, ArrayList<Enemy> enemies) {
+		super(x, y, sprite);
+		this.enemies = enemies;
+	}
+	
+	@Override
+	public double getCost() {
+		return COST;
+	}
+	
+	@Override
+	public void fire() {
+		/* finds the average position of the enemies and then shoots
+		 * at the enemy closest to that.
+		 * 
+		 * (shooting at the average position could potentially not work,
+		 * e.g. shooting between two far apart enemies)
+		 */
+		double totalX = 0;
+		double totalY = 0;
+		
+		for (Enemy enemy : enemies) {
+			totalX += enemy.getXExact();
+			totalY += enemy.getYExact();
+		}
+	}
+	
+}

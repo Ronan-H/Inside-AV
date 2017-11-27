@@ -38,4 +38,13 @@ public class WeaponSystemGrid {
 			weapon.render(g);
 	}
 	
+	/**
+	 * Removes all weapons from the grid and list.
+	 */
+	public void clearAll() {
+		weaponSystems = new ArrayList<WeaponSystem>();
+		
+		grid = new WeaponSystem[grid.length][grid[0].length];
+	}
+	
 }

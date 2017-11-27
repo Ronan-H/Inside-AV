@@ -87,7 +87,7 @@ public abstract class Enemy extends DrawableEntity {
 	public boolean applyDamage(int damage) {
 		health -= damage;
 		
-		if (health < 0) {
+		if (health <= 0) {
 			kill();
 		}
 		

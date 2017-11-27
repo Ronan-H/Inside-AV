@@ -33,7 +33,7 @@
 		<item value="false" key="linkWithEditor"/>
 	</section>
 	<section name="NewClassWizardPage">
-		<item value="false" key="create_constructor"/>
+		<item value="true" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
 	</section>
 	<section name="OptionalMessageDialog.hide.">
@@ -65,6 +65,10 @@
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="completion_proposal_size">
+		<item value="378" key="size.y"/>
+		<item value="1156" key="size.x"/>
+		<item value="327" key="contextSelector.size.y"/>
+		<item value="337" key="contextSelector.size.x"/>
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>

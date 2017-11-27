@@ -87,4 +87,16 @@ public abstract class BulletWeaponSystem extends WeaponSystem {
 	
 	public abstract double getBulletSpeed();
 	
+	@Override
+	/**
+	 * The bullet sound needs to be quieter because it's very
+	 * annoying sounding if it's as loud as the other weapons.
+	 * 
+	 * Also they fire more often.
+	 */
+	public void playShootSound() {
+		getShootSound().play(1f, 0.001f);
+	}
+	
+	
 }

@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
 import ronan_hanley.inside_av.enemy.Enemy;
 
 public final class Level {
+	private int levelNumber;
 	private Image solidImage;
 	private LevelRoute route;
 	private Wave[] waves;
@@ -19,8 +20,11 @@ public final class Level {
 	private boolean waveActive = false;
 	// game ticks since this wave started
 	private int waveTimer = 0;
+	// true if all waves have been completed
+	private boolean levelFinished;
 	
 	public Level(int levelNumber) {
+		this.levelNumber = levelNumber;
 		route = new LevelRoute(levelNumber);
 		
 		String solidImgPath = String.format("res/images/level_textures/level_%d_solid_tile.png", levelNumber);
@@ -52,6 +56,10 @@ public final class Level {
 			if (lastEnemy && enemies.size() == 0) {
 				setWaveActive(false);
 				++currentWave;
+				
+				if (currentWave >= waves.length) {
+					levelFinished = true;
+				}
 			}
 			
 			++waveTimer;
@@ -84,6 +92,14 @@ public final class Level {
 	
 	public int getWaveTimer() {
 		return waveTimer;
+	}
+	
+	public boolean isLevelFinished() {
+		return levelFinished;
+	}
+	
+	public int getLevelNumber() {
+		return levelNumber;
 	}
 	
 }
