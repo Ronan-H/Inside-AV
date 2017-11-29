@@ -1,8 +1,12 @@
 package ronan_hanley.inside_av.weapons_systems;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+
+import ronan_hanley.inside_av.enemy.Enemy;
 
 public final class Tier1LaserWeaponSystem extends LaserWeaponSystem {
 	private static final Image SPRITE;
@@ -19,16 +23,17 @@ public final class Tier1LaserWeaponSystem extends LaserWeaponSystem {
 		SPRITE = sprite;
 		
 		Sound sound = null;
-		try {
-			sound = new Sound("res/sound/sfx/laser_shoot.ogg");
+		// TODO load shoot sound
+		/*try {
+			// sound = new Sound("res/sound/sfx/laser_shoot.ogg");
 		} catch (SlickException e) {
 			e.printStackTrace();
-		}
+		}*/
 		SHOOT_SOUND = sound;
 	}
 	
-	public Tier1LaserWeaponSystem(int x, int y) {
-		super(x, y, SPRITE);
+	public Tier1LaserWeaponSystem(int x, int y, ArrayList<Enemy> enemies) {
+		super(x, y, SPRITE, enemies);
 	}
 	
 	@Override
@@ -39,6 +44,11 @@ public final class Tier1LaserWeaponSystem extends LaserWeaponSystem {
 	@Override
 	protected Sound getShootSound() {
 		return SHOOT_SOUND;
+	}
+
+	@Override
+	public int getMaxDamage() {
+		return 3;
 	}
 	
 }

@@ -11,11 +11,13 @@ import ronan_hanley.inside_av.LevelRouteInstruction;
 
 public abstract class Enemy extends DrawableEntity {
 	private int maxHealth;
-	private int health;
+	private double health;
 	private LevelRoute route;
 	private int direction;
 	private int instructionIndex;
 	private boolean dead;
+	
+	public double distanceToLaser;
 	
 	public Enemy(int x, int y, int maxHealth, Image sprite, LevelRoute route) {
 		super(x, y, sprite);
@@ -68,7 +70,10 @@ public abstract class Enemy extends DrawableEntity {
 		
 		if (InsideAV.DEBUG) {
 			// display health
-			InsideAV.font.drawString(Integer.toString(health), getX(), getY() - 15, Color.white, 2, false, g);
+			InsideAV.font.drawString(String.format("%.1f", health), getX(), getY() - 15, Color.white, 2, false, g);
+			
+			// draw distance to laser
+			// InsideAV.font.drawString(String.format("%.1f", distanceToLaser), getX(), getY() - 30, Color.white, 2, false, g);
 		}
 	}
 	
@@ -84,7 +89,7 @@ public abstract class Enemy extends DrawableEntity {
 	 * @param damage Amount to reduce the health by
 	 * @return True if this enemy died as a result of the damage applied
 	 */
-	public boolean applyDamage(int damage) {
+	public boolean applyDamage(double damage) {
 		health -= damage;
 		
 		if (health <= 0) {

@@ -10,10 +10,11 @@
 <task creationDateTime="2017-11-25 17:15:09.212000" expandedContexts="('taskviewer',)" id="306b25c0-d204-11e7-b6aa-1c1b0de4e626" modificationDateTime="2017-11-25 17:15:54.660000" status="1" subject="Implement all weapons">
 <task creationDateTime="2017-11-25 17:15:29.226000" id="3c590aa1-d204-11e7-983c-1c1b0de4e626" modificationDateTime="2017-11-25 17:15:37.986000" status="1" subject="Add laser weapon" />
 <task actualstartdate="2017-11-26 14:29:46.796000" creationDateTime="2017-11-25 17:15:54.659000" expandedContexts="('taskviewer',)" id="4b81cf2e-d204-11e7-bade-1c1b0de4e626" modificationDateTime="2017-11-27 23:11:36.551000" status="1" subject="Add mortar weapon">
-<task creationDateTime="2017-11-27 23:11:19.776000" id="4717ee00-d3c8-11e7-a33a-d7203ddac0b6" modificationDateTime="2017-11-27 23:11:26.607000" status="1" subject="Add mortar sound effect" />
+<task completiondate="2017-11-28 23:28:47.213000" creationDateTime="2017-11-27 23:11:19.776000" id="4717ee00-d3c8-11e7-a33a-d7203ddac0b6" modificationDateTime="2017-11-28 23:28:47.213000" percentageComplete="100" status="1" subject="Add mortar sound effect" />
 <task creationDateTime="2017-11-27 23:11:36.551000" id="51179770-d3c8-11e7-93ef-d7203ddac0b6" modificationDateTime="2017-11-27 23:11:48.260000" status="1" subject="Add motion prediction to mortar" />
 </task>
 </task>
+<task creationDateTime="2017-11-29 18:23:12.542000" id="5becdbe1-d532-11e7-b1ce-1c1b0de4e626" modificationDateTime="2017-11-29 18:23:20.564000" status="1" subject="Remove &quot;distance to laser&quot; debugging variable" />
 <task actualstartdate="2017-11-25 18:35:37.661000" completiondate="2017-11-25 19:38:02.454000" creationDateTime="2017-11-25 17:16:43.519000" id="68a140f0-d204-11e7-82c9-1c1b0de4e626" modificationDateTime="2017-11-25 19:38:02.454000" percentageComplete="100" status="1" subject="Fix menu background" />
 <task creationDateTime="2017-11-25 17:16:55.683000" expandedContexts="('taskviewer',)" id="6fe15530-d204-11e7-9aa3-1c1b0de4e626" modificationDateTime="2017-11-25 17:18:10.997000" status="1" subject="Add weapon upgrades">
 <task creationDateTime="2017-11-25 17:17:04.971000" id="756a91b0-d204-11e7-a625-1c1b0de4e626" modificationDateTime="2017-11-25 17:17:55.990000" status="1" subject="Add upgrade functionality (i.e. click weapon then click &quot;upgrade&quot; to upgrade)" />
@@ -30,7 +31,9 @@
 <task actualstartdate="2017-11-25 20:21:13.028000" completiondate="2017-11-25 20:45:13.443000" creationDateTime="2017-11-25 17:19:12.681000" id="c189918f-d204-11e7-a30b-1c1b0de4e626" modificationDateTime="2017-11-25 20:45:13.443000" percentageComplete="100" status="1" subject="Add level switching" />
 <task creationDateTime="2017-11-25 17:20:36.586000" id="f38c749e-d204-11e7-bb44-1c1b0de4e626" modificationDateTime="2017-11-25 17:20:45.339000" status="1" subject="Create levels 2 + 3 and their waves" />
 </task>
+<task creationDateTime="2017-11-29 14:22:35.746000" id="beec9c21-d510-11e7-9d28-1c1b0de4e626" modificationDateTime="2017-11-29 14:22:51.947000" status="1" subject="Add center x and center y to some classes" />
 <task creationDateTime="2017-11-27 22:17:58.291000" id="d2dc162e-d3c0-11e7-a4fa-d7203ddac0b6" modificationDateTime="2017-11-27 22:18:05.295000" status="1" subject="Merge reset() and init()" />
+<task creationDateTime="2017-11-29 16:25:33.525000" id="ec6c5851-d521-11e7-9022-1c1b0de4e626" modificationDateTime="2017-11-29 16:25:42.291000" status="1" subject="Make a distance between two entities function" />
 <syncmlconfig>
 <TaskCoach-0000015ff42c02156940e0cc00c000a80000001a>
 <spds>

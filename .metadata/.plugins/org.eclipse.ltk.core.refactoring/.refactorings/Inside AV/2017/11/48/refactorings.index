@@ -1,3 +1,5 @@
 1511814874249	Rename resource 'bomb.png'
 1511821309889	Rename local variable 'enemy2'
 1511823893128	Rename local variable 'currentDistance'
+1511974139434	Rename type 'Explosion'
+1511974650906	Rename local variable 'dmgSrc'

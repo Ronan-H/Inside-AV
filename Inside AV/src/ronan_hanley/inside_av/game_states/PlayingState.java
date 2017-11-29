@@ -17,7 +17,7 @@ import org.newdawn.slick.particles.ParticleIO;
 import org.newdawn.slick.particles.ParticleSystem;
 import org.newdawn.slick.state.StateBasedGame;
 
-import ronan_hanley.inside_av.Explosion;
+import ronan_hanley.inside_av.QuadraticDamageSource;
 import ronan_hanley.inside_av.InsideAV;
 import ronan_hanley.inside_av.Level;
 import ronan_hanley.inside_av.enemy.Enemy;
@@ -57,7 +57,7 @@ public final class PlayingState extends InsideAVState {
 	private ArrayList<ParticleSystem> particleSystems;
 	private ParticleSystem explosionSystem;
 	private Sound explosionSound;
-	private Queue<Explosion> explosionQueue;
+	private Queue<QuadraticDamageSource> explosionQueue;
 	
 	public PlayingState(StateBasedGame sbg) {
 		super(sbg);
@@ -92,7 +92,7 @@ public final class PlayingState extends InsideAVState {
 		particleSystems = new ArrayList<ParticleSystem>();
 		
 		explosionSound = new Sound("res/sound/sfx/explosion.ogg");
-		explosionQueue = new LinkedList<Explosion>();
+		explosionQueue = new LinkedList<QuadraticDamageSource>();
 	}
 	
 	@Override
@@ -129,7 +129,7 @@ public final class PlayingState extends InsideAVState {
 							if (projectile.touchingEnemy(enemy)) {
 								if (projectile instanceof Rocket) {
 									// create an explosion
-									Explosion explosion = new Explosion(projectile.getX(), projectile.getY(),
+									QuadraticDamageSource explosion = new QuadraticDamageSource(projectile.getX(), projectile.getY(),
 											projectile.getDamage(), InsideAV.TILE_SIZE * 3);
 									queueExplosion(explosion);
 								}
@@ -177,7 +177,7 @@ public final class PlayingState extends InsideAVState {
 				
 				outerLoop:
 				for (Mortar mortar : mortarsToProcess) {
-					Explosion explosion = new Explosion(mortar.getX(), mortar.getY(),
+					QuadraticDamageSource explosion = new QuadraticDamageSource(mortar.getX(), mortar.getY(),
 							mortar.getDamage(), InsideAV.TILE_SIZE * 4);
 					queueExplosion(explosion);
 					
@@ -228,9 +228,6 @@ public final class PlayingState extends InsideAVState {
 		case Substate.PLAYING:
 			currentLevel.render(g);
 			
-			// render weapons
-			weapons.renderAll(g);
-			
 			if (currentLevel.isWaveActive()) {
 				// render all enemies
 				for (Enemy enemy : enemies)
@@ -262,6 +259,9 @@ public final class PlayingState extends InsideAVState {
 			if (currentLevel.isWaveActive() && currentLevel.getWaveTimer() < (3 * InsideAV.FPS)) {
 				InsideAV.font.drawString("Malware payload incoming!!", InsideAV.SCREEN_WIDTH / 2, InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 2, Color.red, 4, true, g);
 			}
+			
+			// render weapons
+			weapons.renderAll(g);
 			
 			// render all particles
 			for (ParticleSystem particleSystem : particleSystems) {
@@ -336,7 +336,7 @@ public final class PlayingState extends InsideAVState {
 					}
 				} else {
 					if (offsetY < 0) {
-						weapon = new Tier1LaserWeaponSystem(wepX, wepY);
+						weapon = new Tier1LaserWeaponSystem(wepX, wepY, enemies);
 					} else {
 						weapon = new Tier1RocketWeaponSystem(wepX, wepY);
 					}
@@ -445,20 +445,20 @@ public final class PlayingState extends InsideAVState {
 		currentLevel = new Level(level);
 		enemies = new ArrayList<Enemy>();
 		particleSystems = new ArrayList<ParticleSystem>();
-		explosionQueue = new LinkedList<Explosion>();
+		explosionQueue = new LinkedList<QuadraticDamageSource>();
 	}
 	
 	/**
 	 * Add an explosion to be executed on the next game tick.
 	 * @param explosion
 	 */
-	public void queueExplosion(Explosion explosion) {
+	public void queueExplosion(QuadraticDamageSource explosion) {
 		explosionQueue.add(explosion);
 	}
 	
 	public void executeAllExplosions() throws SlickException {
 		while (!explosionQueue.isEmpty()) {
-			Explosion explosion = explosionQueue.poll();
+			QuadraticDamageSource explosion = explosionQueue.poll();
 			
 			// apply damage to all enemies
 			for (Enemy enemy : enemies) {

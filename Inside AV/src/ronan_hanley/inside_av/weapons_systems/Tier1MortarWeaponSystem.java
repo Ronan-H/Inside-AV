@@ -37,8 +37,7 @@ public final class Tier1MortarWeaponSystem extends MortarWeaponSystem {
 	}
 	
 	public int getFireInterval() {
-		// TODO Change back to 5
-		return 1 * InsideAV.FPS;
+		return 3 * InsideAV.FPS;
 	}
 
 	@Override

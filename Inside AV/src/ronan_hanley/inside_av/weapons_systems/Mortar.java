@@ -79,8 +79,7 @@ public final class Mortar extends Projectile {
 		 * 
 		 * using a quadratic relationship.
 		 */
-		int newSize = SPRITE.getWidth() + (int) Math.round(SPRITE.getWidth() * 3 * Math.pow(distFraction * 6, 2) / 36);
-		// int newSize = (int) (SPRITE.getWidth() + Math.abs(distFraction) * getHalfWidth());
+		int newSize = SPRITE.getWidth() + (int) Math.round(SPRITE.getWidth() * 3 * (-Math.pow(distFraction, 2) + 2 * distFraction));
 		
 		g.drawImage(SPRITE, getX(), getY(), getX() + newSize, getY() + newSize, 0, 0, SPRITE.getWidth(), SPRITE.getHeight());
 	}

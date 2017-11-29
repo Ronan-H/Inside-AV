@@ -21,4 +21,5 @@
 <fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.InsideAV"/>
+<fullyQualifiedTypeName name="ronan_hanley.inside_av.QuadraticDamageSource"/>
 </qualifiedTypeNameHistroy>

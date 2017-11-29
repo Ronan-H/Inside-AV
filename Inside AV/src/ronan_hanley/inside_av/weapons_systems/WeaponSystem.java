@@ -121,4 +121,48 @@ public abstract class WeaponSystem extends RotationalEntity {
 		getShootSound().play(1f, 0.005f);
 	}
 	
+	/**
+	 * Gets the average x and y coordinate for an enemy, then returns
+	 * the enemy closest to that.
+	 * @param enemies
+	 * @return The closest enemy to the mean point.
+	 */
+	public static Enemy findCentralEnemy(ArrayList<Enemy> enemies) {
+		Enemy centralEnemy;
+		
+		if (enemies.size() == 0) {
+			centralEnemy = null;
+		} else {
+			double totalX = 0;
+			double totalY = 0;
+			
+			double avgX, avgY;
+			
+			for (Enemy enemy : enemies) {
+				totalX += enemy.getXExact();
+				totalY += enemy.getYExact();
+			}
+			
+			avgX = totalX / enemies.size();
+			avgY = totalY / enemies.size();
+			
+			// find the closest enemy to that point
+			Enemy closestEnemy = null;
+			double shortestDistance = Double.MAX_VALUE;
+			double distance;
+			for (Enemy enemy : enemies) {
+				distance = Math.sqrt(
+					Math.pow(enemy.getXExact() - avgX, 2) + Math.pow(enemy.getYExact() - avgY, 2));
+				if (distance < shortestDistance) {
+					closestEnemy = enemy;
+					shortestDistance = distance;
+				}
+			}
+			
+			centralEnemy = closestEnemy;
+		}
+		
+		return centralEnemy;
+	}
+	
 }
