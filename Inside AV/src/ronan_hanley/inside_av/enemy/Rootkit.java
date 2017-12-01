@@ -32,7 +32,7 @@ public class Rootkit extends Enemy {
 
 	@Override
 	public double getKillReward() {
-		return 250;
+		return 125;
 	}
 	
 }

@@ -31,7 +31,7 @@ public class Virus extends Enemy {
 
 	@Override
 	public double getKillReward() {
-		return 150;
+		return 75;
 	}
 	
 }

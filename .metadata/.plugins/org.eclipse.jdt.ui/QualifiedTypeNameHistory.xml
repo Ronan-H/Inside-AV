@@ -22,4 +22,6 @@
 <fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.InsideAV"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.QuadraticDamageSource"/>
+<fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier1MortarWeaponSystem"/>
+<fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier1LaserWeaponSystem"/>
 </qualifiedTypeNameHistroy>

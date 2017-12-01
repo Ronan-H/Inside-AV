@@ -6,31 +6,40 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="3" key="selection"/>
+		<item value="0.2" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="0.15"/>
+			<item value="0.5"/>
+			<item value="0.4"/>
+			<item value="0.25"/>
+			<item value="0.2"/>
+			<item value="0.2 0"/>
+			<item value="1 "/>
+			<item value="1.5"/>
+			<item value="2"/>
+			<item value="new level"/>
+			<item value=" 0"/>
 			<item value="1"/>
 			<item value="0.3"/>
 			<item value=".play"/>
 			<item value=".png"/>
-			<item value="io."/>
-			<item value="particles/"/>
-			<item value="waveac"/>
-			<item value="wavac"/>
-			<item value="new ex"/>
-			<item value="remove dead"/>
-			<item value="&lt; 0"/>
-			<item value="new Explosion"/>
-			<item value="try this time"/>
-			<item value="fps"/>
-			<item value="c"/>
 		</list>
 		<list key="replacehistory">
-			<item value="3"/>
+			<item value="0.2"/>
+			<item value="0.15"/>
+			<item value="0.5"/>
+			<item value="0.4"/>
+			<item value="0.25"/>
+			<item value="0.2 1"/>
+			<item value="0.5 1"/>
 			<item value="1"/>
+			<item value="1.5"/>
+			<item value=" 2"/>
+			<item value="3"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

@@ -17,13 +17,17 @@ import org.newdawn.slick.particles.ParticleIO;
 import org.newdawn.slick.particles.ParticleSystem;
 import org.newdawn.slick.state.StateBasedGame;
 
-import ronan_hanley.inside_av.QuadraticDamageSource;
 import ronan_hanley.inside_av.InsideAV;
 import ronan_hanley.inside_av.Level;
+import ronan_hanley.inside_av.QuadraticDamageSource;
 import ronan_hanley.inside_av.enemy.Enemy;
+import ronan_hanley.inside_av.weapons_systems.BulletWeaponSystem;
+import ronan_hanley.inside_av.weapons_systems.LaserWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Mortar;
+import ronan_hanley.inside_av.weapons_systems.MortarWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Projectile;
 import ronan_hanley.inside_av.weapons_systems.Rocket;
+import ronan_hanley.inside_av.weapons_systems.RocketWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Tier1BulletWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Tier1LaserWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.Tier1MortarWeaponSystem;
@@ -38,6 +42,7 @@ public final class PlayingState extends InsideAVState {
 	private Level currentLevel;
 	private ArrayList<Enemy> enemies;
 	// The player's money. Currency is bitcoin.
+	// TODO change back to 150 (current: 615)
 	private static final double STARTING_PLAYER_MONEY = 150;
 	private double playerMoney;
 	/* The health of the computer system; enemies apply damage when
@@ -70,7 +75,7 @@ public final class PlayingState extends InsideAVState {
 		level =	1;
 		systemHealth = 1000;
 		// TODO remove extra money
-		playerMoney = STARTING_PLAYER_MONEY + 10000;
+		playerMoney = STARTING_PLAYER_MONEY;
 		
 		if (InsideAV.DEBUG) {
 			playerMoney = 10000;
@@ -232,10 +237,45 @@ public final class PlayingState extends InsideAVState {
 				// render all enemies
 				for (Enemy enemy : enemies)
 					enemy.render(g);
-			} else {
-				// wave not active
-				if (selectingWeapon) {
-					weaponWheel.draw(weaponWheelX - InsideAV.TILE_SIZE, weaponWheelY - InsideAV.TILE_SIZE);
+			}
+			
+			// render weapons
+			weapons.renderAll(g);
+			
+			// render all particles
+			for (ParticleSystem particleSystem : particleSystems) {
+				particleSystem.render();
+			}
+			
+			if (selectingWeapon) {
+				weaponWheel.draw(weaponWheelX - InsideAV.TILE_SIZE, weaponWheelY - InsideAV.TILE_SIZE);
+				
+				// draw weapon prices
+				int priceScale = 2;
+				int xOffset = InsideAV.HALF_TILE_SIZE * 3;
+				int yOffset = InsideAV.TILE_SIZE + (InsideAV.font.getCharHeight() * priceScale);
+				
+				double[] prices = {BulletWeaponSystem.COST,
+						   LaserWeaponSystem.COST,
+						   MortarWeaponSystem.COST,
+						   RocketWeaponSystem.COST};
+				
+				int priceCounter = 0;
+				for (int yOff = -1; yOff <= 1; yOff += 2) {
+					for (int xOff = -1; xOff <= 1; xOff += 2) {
+						int priceX = weaponWheelX + (xOff * xOffset);
+						int priceY = weaponWheelY + (yOff * yOffset);
+						
+						// make price green if player can afford, or red if cannot
+						Color priceColor;
+						if (playerMoney >= prices[priceCounter]) {
+							priceColor = Color.green;
+						} else {
+							priceColor = Color.red;
+						}
+						
+						InsideAV.font.drawString(Double.toString(prices[priceCounter++]), priceX, priceY, priceColor, priceScale, true, g);
+					}
 				}
 			}
 			
@@ -258,14 +298,6 @@ public final class PlayingState extends InsideAVState {
 			// render wave started text if necessary
 			if (currentLevel.isWaveActive() && currentLevel.getWaveTimer() < (3 * InsideAV.FPS)) {
 				InsideAV.font.drawString("Malware payload incoming!!", InsideAV.SCREEN_WIDTH / 2, InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 2, Color.red, 4, true, g);
-			}
-			
-			// render weapons
-			weapons.renderAll(g);
-			
-			// render all particles
-			for (ParticleSystem particleSystem : particleSystems) {
-				particleSystem.render();
 			}
 			break;
 		case Substate.TUTORIAL:

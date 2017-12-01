@@ -7,11 +7,10 @@
 <task creationDateTime="2017-11-25 17:21:19.525000" id="0d246d51-d205-11e7-8df1-1c1b0de4e626" modificationDateTime="2017-11-25 17:21:26.079000" status="1" subject="Add rocket projectile particle effects" />
 </task>
 <task actualstartdate="2017-11-25 20:53:32.975000" completiondate="2017-11-25 21:46:55.387000" creationDateTime="2017-11-25 17:14:10.801000" id="0d9a5611-d204-11e7-83d9-1c1b0de4e626" modificationDateTime="2017-11-25 21:46:55.387000" percentageComplete="100" status="1" subject="Add game over" />
-<task creationDateTime="2017-11-25 17:15:09.212000" expandedContexts="('taskviewer',)" id="306b25c0-d204-11e7-b6aa-1c1b0de4e626" modificationDateTime="2017-11-25 17:15:54.660000" status="1" subject="Implement all weapons">
-<task creationDateTime="2017-11-25 17:15:29.226000" id="3c590aa1-d204-11e7-983c-1c1b0de4e626" modificationDateTime="2017-11-25 17:15:37.986000" status="1" subject="Add laser weapon" />
-<task actualstartdate="2017-11-26 14:29:46.796000" creationDateTime="2017-11-25 17:15:54.659000" expandedContexts="('taskviewer',)" id="4b81cf2e-d204-11e7-bade-1c1b0de4e626" modificationDateTime="2017-11-27 23:11:36.551000" status="1" subject="Add mortar weapon">
+<task completiondate="2017-11-29 23:31:28.266000" creationDateTime="2017-11-25 17:15:09.212000" expandedContexts="('taskviewer',)" id="306b25c0-d204-11e7-b6aa-1c1b0de4e626" modificationDateTime="2017-11-29 23:31:28.266000" percentageComplete="100" status="1" subject="Implement all weapons">
+<task completiondate="2017-11-29 23:31:23.296000" creationDateTime="2017-11-25 17:15:29.226000" id="3c590aa1-d204-11e7-983c-1c1b0de4e626" modificationDateTime="2017-11-29 23:31:23.296000" percentageComplete="100" status="1" subject="Add laser weapon" />
+<task actualstartdate="2017-11-26 14:29:46.796000" completiondate="2017-11-29 23:31:28.266000" creationDateTime="2017-11-25 17:15:54.659000" expandedContexts="('taskviewer',)" id="4b81cf2e-d204-11e7-bade-1c1b0de4e626" modificationDateTime="2017-11-29 23:31:16.531000" percentageComplete="100" status="1" subject="Add mortar weapon">
 <task completiondate="2017-11-28 23:28:47.213000" creationDateTime="2017-11-27 23:11:19.776000" id="4717ee00-d3c8-11e7-a33a-d7203ddac0b6" modificationDateTime="2017-11-28 23:28:47.213000" percentageComplete="100" status="1" subject="Add mortar sound effect" />
-<task creationDateTime="2017-11-27 23:11:36.551000" id="51179770-d3c8-11e7-93ef-d7203ddac0b6" modificationDateTime="2017-11-27 23:11:48.260000" status="1" subject="Add motion prediction to mortar" />
 </task>
 </task>
 <task creationDateTime="2017-11-29 18:23:12.542000" id="5becdbe1-d532-11e7-b1ce-1c1b0de4e626" modificationDateTime="2017-11-29 18:23:20.564000" status="1" subject="Remove &quot;distance to laser&quot; debugging variable" />
@@ -25,7 +24,9 @@
 <task creationDateTime="2017-11-25 17:18:51.088000" id="b4aabd00-d204-11e7-83e1-1c1b0de4e626" modificationDateTime="2017-11-25 17:18:55.916000" status="1" subject="Add rocket weapon tier classes" />
 </task>
 </task>
+<task creationDateTime="2017-12-01 18:21:24.670000" id="707465e1-d6c4-11e7-8319-f0bd19da6de9" modificationDateTime="2017-12-01 18:21:30.926000" status="1" subject="Add .txt to wave files" />
 <task creationDateTime="2017-11-26 21:12:36.639000" id="86f5baf0-d2ee-11e7-831d-d7203ddac0b6" modificationDateTime="2017-11-26 21:12:45.577000" status="1" subject="Make all classes that should be final, final" />
+<task actualstartdate="2017-11-29 23:39:45.464000" creationDateTime="2017-11-29 23:39:33.437000" id="8d6b96cf-d55e-11e7-91c7-1c1b0de4e626" modificationDateTime="2017-11-29 23:39:50.489000" priority="1" status="1" subject="Render weapon wheel prices" />
 <task creationDateTime="2017-11-27 20:36:08.281000" id="99028c8f-d3b2-11e7-92ad-d7203ddac0b6" modificationDateTime="2017-11-27 20:36:21.819000" status="1" subject="Fix menu buttons not highlighed if mouse not moved at game start" />
 <task creationDateTime="2017-11-25 17:19:07.443000" expandedContexts="('taskviewer',)" id="be6a5030-d204-11e7-b82a-1c1b0de4e626" modificationDateTime="2017-11-25 17:20:36.586000" status="1" subject="Add more levels">
 <task actualstartdate="2017-11-25 20:21:13.028000" completiondate="2017-11-25 20:45:13.443000" creationDateTime="2017-11-25 17:19:12.681000" id="c189918f-d204-11e7-a30b-1c1b0de4e626" modificationDateTime="2017-11-25 20:45:13.443000" percentageComplete="100" status="1" subject="Add level switching" />

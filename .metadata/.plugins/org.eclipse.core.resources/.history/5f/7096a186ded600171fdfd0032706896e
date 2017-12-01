@@ -1,0 +1,10 @@
+package ronan_hanley.inside_av.testing;
+
+public class SineWaveEnemies {
+	public static void main(String[] args) {
+		for (float n = 0; n <= 1; n += 0.1f) {
+			System.out.printf("%f 1%n", Math.sin(n));
+		}
+	}
+
+}
