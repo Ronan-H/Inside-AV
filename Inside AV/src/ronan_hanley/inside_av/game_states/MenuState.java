@@ -4,6 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.StateBasedGame;
@@ -20,6 +21,7 @@ public final class MenuState extends InsideAVState {
 	private static Sound menuSelectSound;
 	private boolean mouseHoveringButton = false;
 	private boolean exitOnNextUpdate = false;
+	private Music menuMusic;
 	
 	public MenuState(StateBasedGame sbg) {
 		super(sbg);
@@ -27,6 +29,9 @@ public final class MenuState extends InsideAVState {
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		menuMusic = new Music("res/sound/music/menu_music.ogg");
+		menuMusic.loop(1f, 0.1f);
+		
 		background = new Image("res/images/menu_background.png");
 		String[] buttonLabels = {"Play", "Level Select", "Exit"};
 		menuButtons = new ButtonSet(buttonLabels, InsideAV.SCREEN_WIDTH / 2 - 150, (InsideAV.font.getCharHeight() + 4) * TITLE_SCALE, 300, 40, Color.black, Color.green, 15);
@@ -88,6 +93,7 @@ public final class MenuState extends InsideAVState {
 		case 0:
 			// Play
 			enterState(1, new FadeOutTransition(), new FadeInTransition());
+			menuMusic.stop();
 			break;
 		case 1:
 			// Level Select

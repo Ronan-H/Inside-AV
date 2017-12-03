@@ -45,4 +45,14 @@ public final class Tier1BulletWeaponSystem extends BulletWeaponSystem {
 		return SHOOT_SOUND;
 	}
 	
+	@Override
+	public double getUpgradeCost() {
+		return 200;
+	}
+
+	@Override
+	public WeaponSystem getUpgradedWeapon() {
+		return new Tier2BulletWeaponSystem(getTileX(), getTileY());
+	}
+	
 }

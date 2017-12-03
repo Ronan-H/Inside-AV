@@ -18,8 +18,7 @@ public abstract class RocketWeaponSystem extends WeaponSystem {
 	
 	@Override
 	public void fire() {
-		// fires one rocket.
-		// subclasses can call this method multiple times.
+		// fires a rocket
 		addProjectile(new Rocket(getX() + InsideAV.HALF_TILE_SIZE, getY() + InsideAV.HALF_TILE_SIZE, 0.2, this));
 		
 		playShootSound();

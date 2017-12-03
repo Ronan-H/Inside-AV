@@ -45,4 +45,14 @@ public final class Tier1MortarWeaponSystem extends MortarWeaponSystem {
 		return SHOOT_SOUND;
 	}
 	
+	@Override
+	public double getUpgradeCost() {
+		return 400;
+	}
+
+	@Override
+	public WeaponSystem getUpgradedWeapon() {
+		return new Tier2MortarWeaponSystem(getTileX(), getTileY(), enemies);
+	}
+	
 }

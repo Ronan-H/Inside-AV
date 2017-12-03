@@ -42,4 +42,14 @@ public class Tier1RocketWeaponSystem extends RocketWeaponSystem {
 		return SHOOT_SOUND;
 	}
 	
+	@Override
+	public double getUpgradeCost() {
+		return 600;
+	}
+
+	@Override
+	public WeaponSystem getUpgradedWeapon() {
+		return new Tier2RocketWeaponSystem(getTileX(), getTileY());
+	}
+	
 }

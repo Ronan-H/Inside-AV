@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.LevelRoute.LevelRouteInstruction"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.Level"/>
 <fullyQualifiedTypeName name="java.awt.Point"/>
-<fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.WeaponSystemGrid"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.BulletWeaponSystem"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Image"/>
@@ -24,4 +23,7 @@
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.QuadraticDamageSource"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier1MortarWeaponSystem"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier1LaserWeaponSystem"/>
+<fullyQualifiedTypeName name="org.newdawn.slick.Input"/>
+<fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier2MortarWeaponSystem"/>
+<fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier3BulletWeaponSystem"/>
 </qualifiedTypeNameHistroy>

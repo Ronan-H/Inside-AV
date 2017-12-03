@@ -51,4 +51,15 @@ public final class Tier1LaserWeaponSystem extends LaserWeaponSystem {
 		return 3;
 	}
 	
+	@Override
+	public double getUpgradeCost() {
+		return 400;
+	}
+
+	@Override
+	public WeaponSystem getUpgradedWeapon() {
+		return new Tier2LaserWeaponSystem(getTileX(), getTileY(), enemies);
+	}
+	
+	
 }

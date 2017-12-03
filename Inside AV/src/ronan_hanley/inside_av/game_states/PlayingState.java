@@ -56,13 +56,22 @@ public final class PlayingState extends InsideAVState {
 	private static final String[] TUTORIAL_TEXT =  
 		{"Stop the enemies from reaching the\nend",
 	     "Click a tile to place a weapon\nsystem there",
+	     "Hold shift to upgrade your weapons",
 	     "Press space to start the next wave",
-	     "Good luck!\n\n(press enter to close this tutorial)"};
+	     "Good luck!\n\n(Press enter to close this tutorial)"};
 	private WeaponSystemGrid weapons;
 	private ArrayList<ParticleSystem> particleSystems;
 	private ParticleSystem explosionSystem;
 	private Sound explosionSound;
 	private Queue<QuadraticDamageSource> explosionQueue;
+	/* true if text on the screen telling the player to progress
+	 * to the next level when their ready, is shown. 
+	 */
+	private boolean nextLevelPromptShowing = false;
+	// used to draw a rectangle on the grid where the mouse is
+	private int mouseX, mouseY;
+	// used for input polling
+	private Input input;
 	
 	public PlayingState(StateBasedGame sbg) {
 		super(sbg);
@@ -70,6 +79,8 @@ public final class PlayingState extends InsideAVState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		input = container.getInput();
+		
 		// TODO Change back to tutorial
 		substate = Substate.TUTORIAL;
 		level =	1;
@@ -196,6 +207,8 @@ public final class PlayingState extends InsideAVState {
 			} else {
 				// wave not active
 				
+				nextLevelPromptShowing = currentLevel.isLevelFinished();
+				
 				/* remove all projectiles, if there are any
 				 * (clean up the previous wave)
 				 */
@@ -217,6 +230,7 @@ public final class PlayingState extends InsideAVState {
 			// check for game over
 			if (systemHealth <= 0) {
 				substate = Substate.GAME_OVER;
+				currentLevel.stopMusic();
 			}
 			break;
 		}
@@ -246,6 +260,11 @@ public final class PlayingState extends InsideAVState {
 			for (ParticleSystem particleSystem : particleSystems) {
 				particleSystem.render();
 			}
+			
+			// draw rectangle over info panel to hide anything underneath
+			// (eg. stray bullets)
+			g.setColor(Color.black);
+			g.fillRect(InsideAV.STATUS_PANEL_START, 0, InsideAV.STATUS_PANEL_SIZE, InsideAV.SCREEN_HEIGHT);
 			
 			if (selectingWeapon) {
 				weaponWheel.draw(weaponWheelX - InsideAV.TILE_SIZE, weaponWheelY - InsideAV.TILE_SIZE);
@@ -279,11 +298,6 @@ public final class PlayingState extends InsideAVState {
 				}
 			}
 			
-			// draw rectangle over info panel to hide anything underneath
-			// (eg. stray bullets)
-			g.setColor(Color.black);
-			g.fillRect(InsideAV.STATUS_PANEL_START, 0, InsideAV.STATUS_PANEL_SIZE, InsideAV.SCREEN_HEIGHT);
-			
 			// render money amount
 			final int PANEL_TEXT_SCALE = 3;
 			int panelCursorY = PANEL_TEXT_SCALE;
@@ -298,6 +312,37 @@ public final class PlayingState extends InsideAVState {
 			// render wave started text if necessary
 			if (currentLevel.isWaveActive() && currentLevel.getWaveTimer() < (3 * InsideAV.FPS)) {
 				InsideAV.font.drawString("Malware payload incoming!!", InsideAV.SCREEN_WIDTH / 2, InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 2, Color.red, 4, true, g);
+			}
+			
+			// render next level prompt if necessary
+			if (nextLevelPromptShowing) {
+				InsideAV.font.drawString(String.format("Level complete! Press space to continue to level %d.", currentLevel.getLevelNumber()), InsideAV.SCREEN_WIDTH / 2, InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 1, Color.yellow, 2, true, g);
+			}
+			
+			if (input.isKeyDown(Input.KEY_LSHIFT) && !currentLevel.isWaveActive()) {
+				// display weapon upgrade overlay
+				InsideAV.font.drawString("Click a Weapon To Upgrade It", InsideAV.GAME_SCREEN_WIDTH / 2, 2, Color.white, 2, true, g);
+				
+				for (WeaponSystem weapon : weapons.getWeapons()) {
+					double upgradeCost = weapon.getUpgradeCost();
+					if (upgradeCost == -1) {
+						// upgrade not available (weapon is already upgraded fully)
+						continue;
+					}
+					
+					Color priceColor = (upgradeCost <= playerMoney ? Color.green : Color.red);
+					InsideAV.font.drawString(Double.toString(upgradeCost), weapon.getX() + InsideAV.TILE_SIZE / 2, weapon.getY(), priceColor, 1, true, g);
+				}
+			}
+			
+			if (!selectingWeapon && mouseX < InsideAV.GAME_SCREEN_WIDTH) {
+				/* draw a square where the mouse is, so the player
+				 * knows what the grid looks like.
+				 * 
+				 * taking advantage of integer truncation.
+				 */
+				g.setColor(Color.red);
+				g.drawRect((mouseX / InsideAV.TILE_SIZE) * InsideAV.TILE_SIZE, (mouseY / InsideAV.TILE_SIZE) * InsideAV.TILE_SIZE, InsideAV.TILE_SIZE, InsideAV.TILE_SIZE);
 			}
 			break;
 		case Substate.TUTORIAL:
@@ -340,12 +385,12 @@ public final class PlayingState extends InsideAVState {
 	
 	@Override
 	public void mousePressed(int button, int x, int y) {
+		// don't allow the player to buy weapons after the level is over
+		if (nextLevelPromptShowing) return;
+		
 		// account for screen scale
 		x /= InsideAV.screenScale;
 		y /= InsideAV.screenScale;
-		
-		// check if the mouse is outside the level area
-		if (x >= InsideAV.STATUS_PANEL_START) return;
 		
 		if (selectingWeapon) {
 			int offsetX = (x - weaponWheelX);
@@ -383,24 +428,38 @@ public final class PlayingState extends InsideAVState {
 			
 			selectingWeapon = false;
 		} else {
+			// check if the mouse is outside the level area
+			if (x >= InsideAV.STATUS_PANEL_START) return;
+			
+			int tileX = x / InsideAV.TILE_SIZE;
+			int tileY = y / InsideAV.TILE_SIZE;
+			
 			if (currentLevel.isWaveActive() == false) {
+				// weapon purchasing or upgrading
+				
 				// not selecting weapon yet
-				int tileX = x / InsideAV.TILE_SIZE;
-				int tileY = y / InsideAV.TILE_SIZE;
 				
 				// check if the player clicked a wall
 				if (currentLevel.solidAt(tileX, tileY) == false) return;
 				
-				if (weapons.tileHasWeapon(tileX, tileY)) {
+				if (input.isKeyDown(Input.KEY_LSHIFT) && weapons.tileHasWeapon(tileX, tileY)) {
 					// weapon upgrades
+					WeaponSystem oldWeapon = weapons.getWeaponAt(tileX, tileY);
+					double upgradeCost = oldWeapon.getUpgradeCost();
 					
+					WeaponSystem upgradedWeapon = oldWeapon.getUpgradedWeapon();
+					
+					if (upgradedWeapon != null && upgradeCost <= playerMoney) {
+						weapons.upgradeWeaponAt(tileX, tileY);
+						playerMoney -= upgradeCost;
+					}
 				} else {
 					// weapon select
 					weaponWheelX = x;
 					weaponWheelY = y;
+					
+					selectingWeapon = true;
 				}
-				
-				selectingWeapon = true;
 			}
 		}
 	}
@@ -409,7 +468,10 @@ public final class PlayingState extends InsideAVState {
 	public void mouseReleased(int button, int x, int y) {}
 	
 	@Override
-	public void mouseMoved(int oldx, int oldy, int newx, int newy) {}
+	public void mouseMoved(int oldX, int oldY, int newX, int newY) {
+		mouseX = newX / InsideAV.screenScale;
+		mouseY = newY / InsideAV.screenScale;
+	}
 	
 	@Override
 	public void keyPressed(int key, char c) {
@@ -418,6 +480,8 @@ public final class PlayingState extends InsideAVState {
 			if (key == Input.KEY_SPACE) {
 				// start the next wave, if it can be started
 				if (!currentLevel.isWaveActive()) {
+					nextLevelPromptShowing = false;
+					
 					if (currentLevel.isLevelFinished()) {
 						if (currentLevel.getLevelNumber() >= NUM_LEVELS) {
 							// all levels finished; game is won
@@ -439,6 +503,7 @@ public final class PlayingState extends InsideAVState {
 		case Substate.TUTORIAL:
 			if (key == Input.KEY_ENTER) {
 				substate = Substate.PLAYING;
+				currentLevel.loopMusic();
 			}
 			break;
 		case Substate.GAME_OVER:
@@ -466,7 +531,6 @@ public final class PlayingState extends InsideAVState {
 	 */
 	public void reset() {
 		weapons.clearAll();
-		level =	1;
 		systemHealth = 1000;
 		playerMoney = STARTING_PLAYER_MONEY;
 		
@@ -474,7 +538,8 @@ public final class PlayingState extends InsideAVState {
 			playerMoney = 10000;
 		}
 		
-		currentLevel = new Level(level);
+		currentLevel = new Level(level = 1);
+		currentLevel.loopMusic();
 		enemies = new ArrayList<Enemy>();
 		particleSystems = new ArrayList<ParticleSystem>();
 		explosionQueue = new LinkedList<QuadraticDamageSource>();

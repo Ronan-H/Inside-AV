@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 import ronan_hanley.inside_av.enemy.Enemy;
@@ -22,6 +23,7 @@ public final class Level {
 	private int waveTimer = 0;
 	// true if all waves have been completed
 	private boolean levelFinished;
+	private Music levelMusic;
 	
 	public Level(int levelNumber) {
 		this.levelNumber = levelNumber;
@@ -47,6 +49,18 @@ public final class Level {
 		}
 		
 		currentWave = 0;
+		
+		try {
+			levelMusic = new Music(String.format("res/sound/music/level_%d_music.ogg", levelNumber));
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+		
+		/* Start the music, unless this is level one, where
+		 * the music should start once the player reaches the 
+		 * tutorial, instead of when the level is loaded.
+		 */
+		if (levelNumber != 1) loopMusic();
 	}
 	
 	public void update(ArrayList<Enemy> enemies) {
@@ -59,6 +73,7 @@ public final class Level {
 				
 				if (currentWave >= waves.length) {
 					levelFinished = true;
+					levelMusic.stop();
 				}
 			}
 			
@@ -100,6 +115,14 @@ public final class Level {
 	
 	public int getLevelNumber() {
 		return levelNumber;
+	}
+	
+	public void loopMusic() {
+		levelMusic.loop(1f, 0.03f);
+	}
+	
+	public void stopMusic() {
+		levelMusic.stop();
 	}
 	
 }

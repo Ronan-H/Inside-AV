@@ -6,12 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="0.2" key="selection"/>
+		<item value="To Upgrade It" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="to upgrade it"/>
+			<item value="mouse"/>
+			<item value="loop"/>
+			<item value="men"/>
+			<item value="substate"/>
+			<item value="gameover"/>
+			<item value="currentLevel"/>
+			<item value="Substate.tut"/>
 			<item value="0.15"/>
 			<item value="0.5"/>
 			<item value="0.4"/>
@@ -19,14 +27,6 @@
 			<item value="0.2"/>
 			<item value="0.2 0"/>
 			<item value="1 "/>
-			<item value="1.5"/>
-			<item value="2"/>
-			<item value="new level"/>
-			<item value=" 0"/>
-			<item value="1"/>
-			<item value="0.3"/>
-			<item value=".play"/>
-			<item value=".png"/>
 		</list>
 		<list key="replacehistory">
 			<item value="0.2"/>

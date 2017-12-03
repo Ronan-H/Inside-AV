@@ -28,6 +28,10 @@ public class WeaponSystemGrid {
 		return (grid[y][x] != null);
 	}
 	
+	public WeaponSystem getWeaponAt(int x, int y) {
+		return grid[y][x];
+	}
+	
 	public void updateAll(ArrayList<Enemy> enemies) {
 		for (WeaponSystem weapon : weaponSystems)
 			weapon.update(enemies);
@@ -45,6 +49,22 @@ public class WeaponSystemGrid {
 		weaponSystems = new ArrayList<WeaponSystem>();
 		
 		grid = new WeaponSystem[grid.length][grid[0].length];
+	}
+	
+	/**
+	 * Replaces the weapon at a place in the grid with it's upgraded
+	 * version.
+	 * @param x
+	 * @param y
+	 */
+	public void upgradeWeaponAt(int x, int y) {
+		WeaponSystem oldWeapon = grid[y][x];
+		WeaponSystem upgradedWeapon = oldWeapon.getUpgradedWeapon();
+		
+		weaponSystems.remove(oldWeapon);
+		
+		grid[y][x] = upgradedWeapon;
+		weaponSystems.add(upgradedWeapon);
 	}
 	
 }

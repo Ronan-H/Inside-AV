@@ -9,7 +9,7 @@ import ronan_hanley.inside_av.enemy.Enemy;
 
 public abstract class MortarWeaponSystem extends WeaponSystem {
 	public static final double COST = 300;
-	private ArrayList<Enemy> enemies;
+	protected ArrayList<Enemy> enemies;
 	
 	public MortarWeaponSystem(int x, int y, Image sprite, ArrayList<Enemy> enemies) {
 		super(x, y, sprite);

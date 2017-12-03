@@ -118,7 +118,7 @@ public abstract class WeaponSystem extends RotationalEntity {
 	protected abstract Sound getShootSound();
 	
 	public void playShootSound() {
-		getShootSound().play(1f, 0.005f);
+		getShootSound().play(1f, 0.01f);
 	}
 	
 	/**
@@ -164,5 +164,13 @@ public abstract class WeaponSystem extends RotationalEntity {
 		
 		return centralEnemy;
 	}
+	
+	public abstract double getUpgradeCost();
+	
+	/**
+	 * Returns the next tier of this weapon (a new object).
+	 * @return The new, upgraded weapon.
+	 */
+	public abstract WeaponSystem getUpgradedWeapon();
 	
 }

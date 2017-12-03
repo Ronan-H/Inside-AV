@@ -12,7 +12,7 @@ import ronan_hanley.inside_av.enemy.Enemy;
 
 public abstract class LaserWeaponSystem extends WeaponSystem {
 	public static final double COST = 200;
-	private ArrayList<Enemy> enemies;
+	protected ArrayList<Enemy> enemies;
 	// the distance an enemy is outside where they take no damage from the laser
 	private static final int DAMAGE_RADIUS = InsideAV.TILE_SIZE * 6;
 	

@@ -95,7 +95,7 @@ public abstract class BulletWeaponSystem extends WeaponSystem {
 	 * Also they fire more often.
 	 */
 	public void playShootSound() {
-		getShootSound().play(1f, 0.001f);
+		getShootSound().play(1f, 0.005f);
 	}
 	
 	
