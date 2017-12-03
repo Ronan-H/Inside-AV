@@ -22,6 +22,8 @@ public final class MenuState extends InsideAVState {
 	private boolean mouseHoveringButton = false;
 	private boolean exitOnNextUpdate = false;
 	private Music menuMusic;
+	// a counter used to make the background's colour change
+	private int updatesSinceStart = 0;
 	
 	public MenuState(StateBasedGame sbg) {
 		super(sbg);
@@ -33,10 +35,13 @@ public final class MenuState extends InsideAVState {
 		menuMusic.loop(1f, 0.1f);
 		
 		background = new Image("res/images/menu_background.png");
-		String[] buttonLabels = {"Play", "Level Select", "Exit"};
-		menuButtons = new ButtonSet(buttonLabels, InsideAV.SCREEN_WIDTH / 2 - 150, (InsideAV.font.getCharHeight() + 4) * TITLE_SCALE, 300, 40, Color.black, Color.green, 15);
-		// Slick2d can't handle a very very small OGG filesize
-		// So some very quiet random noise was added to the end of te sound effect...
+		String[] buttonLabels = {"Play", "Exit"};
+		menuButtons = new ButtonSet(buttonLabels,
+									InsideAV.SCREEN_WIDTH / 2 - 75,
+									(InsideAV.font.getCharHeight() + 4) * TITLE_SCALE,
+									150, 40,
+									Color.black, Color.green,
+									15);
 		menuSelectSound = new Sound("res/sound/sfx/menu_select.ogg");
 	}
 	
@@ -45,22 +50,31 @@ public final class MenuState extends InsideAVState {
 		if (exitOnNextUpdate) {
 			container.exit();
 		}
+		
+		++updatesSinceStart;
 	}
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.scale(InsideAV.screenScale, InsideAV.screenScale);
 		
-		g.drawImage(background, 0, 0, null);
+		// colour changing background
+		final float CYCLE_LEN = 1500;
+		float hue = (updatesSinceStart % CYCLE_LEN) / CYCLE_LEN;
+		g.drawImage(background, 0, 0, new Color(java.awt.Color.HSBtoRGB(hue, 1, 1)));
 		
 		final Color MENU_TEXT_COLOR = Color.white;
 		
 		InsideAV.font.drawString("Inside AV",
-			InsideAV.SCREEN_WIDTH /2, TITLE_SCALE * 2,
-			MENU_TEXT_COLOR, TITLE_SCALE, true, g);
+								 InsideAV.SCREEN_WIDTH /2, TITLE_SCALE * 2,
+								 MENU_TEXT_COLOR, TITLE_SCALE, true, g);
 		
 		final int BOTTOM_TEXT_SCALE = 2;
-		InsideAV.font.drawString("A game by Ronan Hanley", InsideAV.SCREEN_WIDTH /2, InsideAV.SCREEN_HEIGHT - (InsideAV.font.getCharHeight() * BOTTOM_TEXT_SCALE), MENU_TEXT_COLOR, BOTTOM_TEXT_SCALE, true, g);
+		InsideAV.font.drawString("A game by Ronan Hanley",
+								 InsideAV.SCREEN_WIDTH /2,
+								 InsideAV.SCREEN_HEIGHT - (InsideAV.font.getCharHeight() * BOTTOM_TEXT_SCALE),
+								 MENU_TEXT_COLOR, BOTTOM_TEXT_SCALE,
+								 true, g);
 		
 		menuButtons.render(g);
 	}
@@ -70,7 +84,8 @@ public final class MenuState extends InsideAVState {
 		boolean wasHovering = mouseHoveringButton;
 		// check if user is hovering over a button and change it's color
 		// accounting for screen scale is annoying, maybe there's a better way
-		mouseHoveringButton = menuButtons.updateButtons(newX / InsideAV.screenScale, newY / InsideAV.screenScale);
+		mouseHoveringButton = menuButtons.updateButtons(newX / InsideAV.screenScale,
+														newY / InsideAV.screenScale);
 		
 		if (mouseHoveringButton && !wasHovering) {
 			/* Mouse is hovering over a button and it wasn't before;
@@ -78,11 +93,6 @@ public final class MenuState extends InsideAVState {
 			 */
 			menuSelectSound.play(1f, 0.05f);
 		}
-	}
-	
-	@Override
-	public void mouseDragged(int oldX, int oldY, int newX, int newY) {
-		mouseMoved(oldX, oldY, newX, newY);
 	}
 	
 	@Override
@@ -96,18 +106,11 @@ public final class MenuState extends InsideAVState {
 			menuMusic.stop();
 			break;
 		case 1:
-			// Level Select
-			break;
-		case 2:
 			// Exit
-			// System.exit(0) won't do here because Slick needs to close resources cleanly
+			// System.exit(0) won't work here because Slick needs to close resources cleanly
 			exitOnNextUpdate = true;
 			break;
 		}
-	}
-	
-	@Override
-	public void	mouseReleased(int button, int x, int y) {
 	}
 
 	@Override

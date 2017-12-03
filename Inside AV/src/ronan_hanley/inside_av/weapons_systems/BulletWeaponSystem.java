@@ -2,7 +2,6 @@ package ronan_hanley.inside_av.weapons_systems;
 
 import org.newdawn.slick.Image;
 
-import ronan_hanley.inside_av.InsideAV;
 import ronan_hanley.inside_av.LevelRoute;
 
 public abstract class BulletWeaponSystem extends WeaponSystem {
@@ -22,6 +21,7 @@ public abstract class BulletWeaponSystem extends WeaponSystem {
 		if (target == null) return;
 		
 		// -- predict where the target will be --
+		
 		/* This code mostly copy pasted from:
 		 * http://danikgames.com/blog/how-to-intersect-a-moving-target-in-2d/
 		 * 
@@ -80,20 +80,22 @@ public abstract class BulletWeaponSystem extends WeaponSystem {
 	@Override
 	public void fire() {
 		// spawn a bullet
-		addProjectile(new Bullet(getX() + (InsideAV.TILE_SIZE / 2) - 2, getY() + (InsideAV.TILE_SIZE / 2) - 2, getAngle(), getBulletSpeed()));
+		addProjectile(new Bullet(getCentreX() - 2,
+								 getCentreY() - 2,
+								 getAngle(), getBulletSpeed()));
 		
 		playShootSound();
 	}
 	
 	public abstract double getBulletSpeed();
 	
-	@Override
 	/**
-	 * The bullet sound needs to be quieter because it's very
+	 * The bullet sound needs to be quieter because it's a very
 	 * annoying sounding if it's as loud as the other weapons.
 	 * 
 	 * Also they fire more often.
 	 */
+	@Override
 	public void playShootSound() {
 		getShootSound().play(1f, 0.005f);
 	}

@@ -12,7 +12,6 @@ import ronan_hanley.inside_av.enemy.Enemy;
 
 public abstract class WeaponSystem extends RotationalEntity {
 	private Image sprite;
-	private Image ammo;
 	protected Enemy target = null;
 	// ticks since this weapon picked an enemy to target
 	protected int ticksSinceTarget;
@@ -31,7 +30,7 @@ public abstract class WeaponSystem extends RotationalEntity {
 			// target the closest enemy
 			double shortestDistance = Double.MAX_VALUE;
 			for (Enemy enemy : enemies) {
-				// using the pythagorean theorem to get the distance
+				// using the pythagoras' theorem to get the distance
 				double distance = Math.sqrt(Math.pow(getXExact() - enemy.getXExact(), 2)
 										  + Math.pow(getYExact() - enemy.getYExact(), 2));
 				

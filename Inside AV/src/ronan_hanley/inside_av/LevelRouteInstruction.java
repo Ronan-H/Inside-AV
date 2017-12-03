@@ -8,7 +8,7 @@ import ronan_hanley.inside_av.enemy.Enemy;
  * the map.
  * @author Ronan
  */
-public class LevelRouteInstruction {
+public final class LevelRouteInstruction {
 	// clockwise from up (0=up, 1=right, 2=down, 3=left)
 	private int direction;
 	private int targetTileX;
@@ -53,6 +53,9 @@ public class LevelRouteInstruction {
 	}
 	
 	@Override
+	/**
+	 * Used in the testing class.
+	 */
 	public String toString() {
 		return String.format("Dir: %d targetX: %d targetY: %d", direction, targetTileX, targetTileY);
 	}

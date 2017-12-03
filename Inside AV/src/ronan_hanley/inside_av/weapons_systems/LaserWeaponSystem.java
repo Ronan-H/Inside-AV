@@ -33,18 +33,16 @@ public abstract class LaserWeaponSystem extends WeaponSystem {
 		 * distance = |Am + Bn + C| / sqrt(A^2 + B^2)
 		 */
 		
-		int centerX = getX() + InsideAV.HALF_TILE_SIZE;
-		int centerY = getY() + InsideAV.HALF_TILE_SIZE;
-		
-		QuadraticDamageSource damageSource = new QuadraticDamageSource(centerX, centerY, getMaxDamage(), DAMAGE_RADIUS);
+		QuadraticDamageSource damageSource =
+			new QuadraticDamageSource(getCentreX(), getCentreY(), getMaxDamage(), DAMAGE_RADIUS);
 		
 		double A = Math.sin(getAngle()) / Math.cos(getAngle());
 		double B = -1;
-		double C = centerY - A * centerX;
+		double C = getCentreY() - A * getCentreX();
 		
 		for (Enemy enemy : enemies) {
 			/* This simplifies a line segment to a line. To stop enemies
-			 * being damaged on the other "side" of the line (behine the weapon),
+			 * being damaged on the other "side" of the line (behind the weapon),
 			 * first check to ensure the enemy is 
 			 */
 			double angleToEnemy = Math.atan2(enemy.getY() - getY(), enemy.getX() - getX());
@@ -56,13 +54,11 @@ public abstract class LaserWeaponSystem extends WeaponSystem {
 				continue;
 			}
 			
-			double m = enemy.getX() + InsideAV.HALF_TILE_SIZE;
-			double n = enemy.getY() + InsideAV.HALF_TILE_SIZE;
+			double m = enemy.getCentreX();
+			double n = enemy.getCentreY();
 			
 			// distance to the line
 			double distance = Math.abs(A*m + B*n + C) / Math.sqrt(Math.pow(A, 2) + Math.pow(B, 2));
-			
-			enemy.distanceToLaser = distance;
 			
 			if (distance <= InsideAV.HALF_TILE_SIZE) {
 				/* enemy touching laser; damage it based off
@@ -88,9 +84,7 @@ public abstract class LaserWeaponSystem extends WeaponSystem {
 			int laserLenX = (int) (Math.cos(getAngle()) * laserLen);
 			int laserLenY = (int) (Math.sin(getAngle()) * laserLen);
 			
-			int centerX = getX() + InsideAV.HALF_TILE_SIZE;
-			int centerY = getY() + InsideAV.HALF_TILE_SIZE;
-			g.drawLine(centerX, centerY, centerX + laserLenX, centerY+ laserLenY);
+			g.drawLine(getCentreX(), getCentreY(), getCentreX() + laserLenX, getCentreY() + laserLenY);
 		}
 		
 	}
@@ -100,15 +94,15 @@ public abstract class LaserWeaponSystem extends WeaponSystem {
 		return COST;
 	}
 	
+	/**
+	 * This weapon shoots a laser continuously, so this method is
+	 * not used.
+	 */
 	@Override
-	public void fire() {
-		// TODO this method
-	}
+	public void fire() {}
 	
 	@Override
-	public void playShootSound() {
-		// TODO this method (looping burning sound)
-	}
+	public void playShootSound() {}
 	
 	/**
 	 * How much damage is done to an enemy on top of the weapon

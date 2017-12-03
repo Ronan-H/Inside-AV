@@ -25,15 +25,15 @@
 </task>
 </task>
 <task creationDateTime="2017-12-01 18:21:24.670000" id="707465e1-d6c4-11e7-8319-f0bd19da6de9" modificationDateTime="2017-12-01 18:21:30.926000" status="1" subject="Add .txt to wave files" />
-<task creationDateTime="2017-11-26 21:12:36.639000" id="86f5baf0-d2ee-11e7-831d-d7203ddac0b6" modificationDateTime="2017-11-26 21:12:45.577000" status="1" subject="Make all classes that should be final, final" />
+<task completiondate="2017-12-03 18:32:09.058000" creationDateTime="2017-11-26 21:12:36.639000" id="86f5baf0-d2ee-11e7-831d-d7203ddac0b6" modificationDateTime="2017-12-03 18:32:09.058000" percentageComplete="100" status="1" subject="Make all classes that should be final, final" />
 <task actualstartdate="2017-11-29 23:39:45.464000" completiondate="2017-12-02 17:25:54.918000" creationDateTime="2017-11-29 23:39:33.437000" id="8d6b96cf-d55e-11e7-91c7-1c1b0de4e626" modificationDateTime="2017-12-02 17:25:54.918000" percentageComplete="100" priority="1" status="1" subject="Render weapon wheel prices" />
 <task creationDateTime="2017-11-27 20:36:08.281000" id="99028c8f-d3b2-11e7-92ad-d7203ddac0b6" modificationDateTime="2017-11-27 20:36:21.819000" status="1" subject="Fix menu buttons not highlighed if mouse not moved at game start" />
 <task completiondate="2017-12-03 12:23:11.379000" creationDateTime="2017-11-25 17:19:07.443000" expandedContexts="('taskviewer',)" id="be6a5030-d204-11e7-b82a-1c1b0de4e626" modificationDateTime="2017-12-03 12:23:11.379000" percentageComplete="100" status="1" subject="Add more levels">
 <task actualstartdate="2017-11-25 20:21:13.028000" completiondate="2017-11-25 20:45:13.443000" creationDateTime="2017-11-25 17:19:12.681000" id="c189918f-d204-11e7-a30b-1c1b0de4e626" modificationDateTime="2017-11-25 20:45:13.443000" percentageComplete="100" status="1" subject="Add level switching" />
 <task completiondate="2017-12-02 17:25:57.565000" creationDateTime="2017-11-25 17:20:36.586000" id="f38c749e-d204-11e7-bb44-1c1b0de4e626" modificationDateTime="2017-12-02 17:25:57.565000" percentageComplete="100" status="1" subject="Create levels 2 + 3 and their waves" />
 </task>
-<task creationDateTime="2017-11-29 14:22:35.746000" id="beec9c21-d510-11e7-9d28-1c1b0de4e626" modificationDateTime="2017-11-29 14:22:51.947000" status="1" subject="Add center x and center y to some classes" />
-<task creationDateTime="2017-11-27 22:17:58.291000" id="d2dc162e-d3c0-11e7-a4fa-d7203ddac0b6" modificationDateTime="2017-11-27 22:18:05.295000" status="1" subject="Merge reset() and init()" />
+<task actualstartdate="2017-12-03 17:47:29.712000" creationDateTime="2017-11-29 14:22:35.746000" id="beec9c21-d510-11e7-9d28-1c1b0de4e626" modificationDateTime="2017-12-03 17:47:29.712000" status="1" subject="Add center x and center y to some classes" />
+<task actualstartdate="2017-12-03 18:32:16.076000" creationDateTime="2017-11-27 22:17:58.291000" id="d2dc162e-d3c0-11e7-a4fa-d7203ddac0b6" modificationDateTime="2017-12-03 18:32:16.076000" status="1" subject="Merge reset() and init()" />
 <task creationDateTime="2017-11-29 16:25:33.525000" id="ec6c5851-d521-11e7-9022-1c1b0de4e626" modificationDateTime="2017-11-29 16:25:42.291000" status="1" subject="Make a distance between two entities function" />
 <syncmlconfig>
 <TaskCoach-0000015ff42c02156940e0cc00c000a80000001a>

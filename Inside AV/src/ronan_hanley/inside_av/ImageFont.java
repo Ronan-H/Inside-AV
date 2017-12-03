@@ -56,7 +56,6 @@ public final class ImageFont {
 		chars = new Image[format.length()];
 		
 		final int ROW_LENGTH = charSheet.getWidth() / charWidth;
-		final int COL_LENGTH = charSheet.getHeight() / charHeight;
 		
 		for (int i = 0; i < format.length(); ++i) {
 			int xPos = i % ROW_LENGTH;
@@ -111,11 +110,11 @@ public final class ImageFont {
 			
 			// draw character
 			g.drawImage(chars[charIndex],
-					cursorX, cursorY, // screen start
-					cursorX + CHAR_SCREEN_WIDTH, cursorY + CHAR_SCREEN_HEIGHT, // screen end
-					0, 0, // image start
-					charWidth, charHeight, // image end
-					color);
+				cursorX, cursorY, // screen start
+				cursorX + CHAR_SCREEN_WIDTH, cursorY + CHAR_SCREEN_HEIGHT, // screen end
+				0, 0, // image start
+				charWidth, charHeight, // image end
+				color);
 			
 			cursorX += CHAR_SCREEN_WIDTH;
 		}

@@ -49,7 +49,8 @@ public final class Mortar extends Projectile {
 		
 		if (!reachedDestination) {
 			// check if this mortar has reached it's destination
-			double distTravelled = Math.sqrt(Math.pow(srcX - getXExact(), 2) + Math.pow(srcY - getYExact(), 2));
+			double distTravelled = Math.sqrt(
+				Math.pow(srcX - getXExact(), 2) + Math.pow(srcY - getYExact(), 2));
 			reachedDestination = distTravelled >= flightDistance;
 		}
 	}
@@ -63,15 +64,19 @@ public final class Mortar extends Projectile {
 		 */
 		
 		// calculate distance from mortar to target
-		double currentDistance = Math.sqrt(Math.pow(destX - getXExact(), 2) + Math.pow(destY - getYExact(), 2));
+		double currentDistance = Math.sqrt(
+			Math.pow(destX - getXExact(), 2) + Math.pow(destY - getYExact(), 2));
 		
-		double distFraction = 1 - Math.abs(((flightDistance - currentDistance) / flightDistance) * 2 - 1);
+		double distFraction =
+			1 - Math.abs(((flightDistance - currentDistance) / flightDistance) * 2 - 1);
+		
 		if (InsideAV.DEBUG) {
-			InsideAV.font.drawString(String.format("f: %3f", distFraction), getX(), getY() - 15, Color.white, 1, false, g);
-			
-			// show where this mortar will land
-			/*g.setColor(Color.red);
-			g.fillRect(destX, destY, 2, 2);*/
+			InsideAV.font.drawString(String.format("f: %3f", distFraction),
+				getX(),
+				getY() - 15,
+				Color.white,
+				1,
+				false, g);
 		}
 		
 		/* making it so that at it's smallest, the mortar is normal size.
@@ -79,15 +84,22 @@ public final class Mortar extends Projectile {
 		 * 
 		 * using a quadratic relationship.
 		 */
-		int newSize = SPRITE.getWidth() + (int) Math.round(SPRITE.getWidth() * 3 * (-Math.pow(distFraction, 2) + 2 * distFraction));
+		int newSize = SPRITE.getWidth()
+			+ (int) Math.round(SPRITE.getWidth() * 3 * (-Math.pow(distFraction, 2) + 2 * distFraction));
 		
-		g.drawImage(SPRITE, getX(), getY(), getX() + newSize, getY() + newSize, 0, 0, SPRITE.getWidth(), SPRITE.getHeight());
+		g.drawImage(SPRITE,
+			getX(),
+			getY(),
+			getX() + newSize,
+			getY() + newSize,
+			0, 0,
+			SPRITE.getWidth(), SPRITE.getHeight());
 	}
 	
-	@Override
 	/**
-	 * Disables collision detection.
+	 * Disables collision detection for this object.
 	 */
+	@Override
 	public boolean touchingEnemy(Enemy enemy) {
 		return false;
 	}

@@ -4,8 +4,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
-import ronan_hanley.inside_av.InsideAV;
-
 public final class Tier2BulletWeaponSystem extends BulletWeaponSystem {
 	private static final Image SPRITE;
 	private static final Sound SHOOT_SOUND;
@@ -35,7 +33,7 @@ public final class Tier2BulletWeaponSystem extends BulletWeaponSystem {
 	
 	@Override
 	public void fire() {
-		// the distance from the center of this weapon to it's barrels
+		// the distance from the centre of this weapon to it's barrels
 		int barrelDistance = 6;
 		
 		int offsetX, offsetY;
@@ -43,13 +41,18 @@ public final class Tier2BulletWeaponSystem extends BulletWeaponSystem {
 		offsetX = (int) (Math.cos(getAngle() + (Math.PI /2)) * barrelDistance);
 		offsetY = (int) (Math.sin(getAngle() + (Math.PI /2)) * barrelDistance);
 		
-		// spawn a bullet
-		addProjectile(new Bullet(getX() + (InsideAV.TILE_SIZE / 2) - 2 + offsetX, getY() + (InsideAV.TILE_SIZE / 2) - 2 + offsetY, getAngle(), getBulletSpeed()));
+		addProjectile(new Bullet(getCentreX() - 2 + offsetX,
+			getCentreY() - 2 + offsetY,
+			getAngle(),
+			getBulletSpeed()));
 		
 		offsetX = (int) (Math.cos(getAngle() - (Math.PI /2)) * barrelDistance);
 		offsetY = (int) (Math.sin(getAngle() - (Math.PI /2)) * barrelDistance);
 		
-		addProjectile(new Bullet(getX() + (InsideAV.TILE_SIZE / 2) - 2 + offsetX, getY() + (InsideAV.TILE_SIZE / 2) - 2 + offsetY, getAngle(), getBulletSpeed()));
+		addProjectile(new Bullet(getCentreX() - 2 + offsetX,
+			getCentreY() - 2 + offsetY,
+			getAngle(),
+			getBulletSpeed()));
 		
 		playShootSound();
 	}

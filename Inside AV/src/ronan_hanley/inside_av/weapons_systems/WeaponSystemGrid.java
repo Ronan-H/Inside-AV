@@ -6,7 +6,7 @@ import org.newdawn.slick.Graphics;
 
 import ronan_hanley.inside_av.enemy.Enemy;
 
-public class WeaponSystemGrid {
+public final class WeaponSystemGrid {
 	private WeaponSystem[][] grid;
 	private ArrayList<WeaponSystem> weaponSystems;
 	

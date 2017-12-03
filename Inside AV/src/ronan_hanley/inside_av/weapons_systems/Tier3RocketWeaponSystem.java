@@ -6,7 +6,7 @@ import org.newdawn.slick.Sound;
 
 import ronan_hanley.inside_av.InsideAV;
 
-public class Tier3RocketWeaponSystem extends RocketWeaponSystem {
+public final class Tier3RocketWeaponSystem extends RocketWeaponSystem {
 	private static final Image SPRITE;
 	private static final Sound SHOOT_SOUND;
 	
@@ -35,25 +35,33 @@ public class Tier3RocketWeaponSystem extends RocketWeaponSystem {
 	
 	@Override
 	public void fire() {
-		// the distance from the center of this weapon to it's barrels
+		// the distance from the centre of this weapon to it's barrels
 		int barrelDistance = 9;
 		
 		int offsetX, offsetY;
 		
 		offsetX = offsetY = 0;
 		
-		addProjectile(new Rocket(getX() + InsideAV.HALF_TILE_SIZE + offsetX, getY() + InsideAV.HALF_TILE_SIZE + offsetY, 0.2, this));
+		addProjectile(new Rocket(getCentreX() + offsetX,
+			getCentreY() + offsetY,
+			0.2,
+			this));
 		
 		offsetX = (int) (Math.cos(getAngle() + (Math.PI /2)) * barrelDistance);
 		offsetY = (int) (Math.sin(getAngle() + (Math.PI /2)) * barrelDistance);
 		
-		addProjectile(new Rocket(getX() + InsideAV.HALF_TILE_SIZE + offsetX, getY() + InsideAV.HALF_TILE_SIZE + offsetY, 0.2, this));
+		addProjectile(new Rocket(getCentreX() + offsetX,
+			getCentreY() + offsetY,
+			0.2,
+			this));
 		
 		offsetX = (int) (Math.cos(getAngle() - (Math.PI /2)) * barrelDistance);
 		offsetY = (int) (Math.sin(getAngle() - (Math.PI /2)) * barrelDistance);
 		
-		// fires a rocket
-		addProjectile(new Rocket(getX() + InsideAV.HALF_TILE_SIZE + offsetX, getY() + InsideAV.HALF_TILE_SIZE + offsetY, 0.2, this));
+		addProjectile(new Rocket(getCentreX() + offsetX,
+			getCentreY() + offsetY,
+			0.2,
+			this));
 		
 		playShootSound();
 	}

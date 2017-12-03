@@ -10,18 +10,14 @@ import ronan_hanley.inside_av.LevelRoute;
 import ronan_hanley.inside_av.LevelRouteInstruction;
 
 public abstract class Enemy extends DrawableEntity {
-	private int maxHealth;
 	private double health;
 	private LevelRoute route;
 	private int direction;
 	private int instructionIndex;
 	private boolean dead;
 	
-	public double distanceToLaser;
-	
 	public Enemy(int x, int y, int maxHealth, Image sprite, LevelRoute route) {
 		super(x, y, sprite);
-		this.maxHealth = maxHealth;
 		this.health = maxHealth;
 		this.route = route;
 		direction = 1;
@@ -71,9 +67,6 @@ public abstract class Enemy extends DrawableEntity {
 		if (InsideAV.DEBUG) {
 			// display health
 			InsideAV.font.drawString(String.format("%.1f", health), getX(), getY() - 15, Color.white, 2, false, g);
-			
-			// draw distance to laser
-			// InsideAV.font.drawString(String.format("%.1f", distanceToLaser), getX(), getY() - 30, Color.white, 2, false, g);
 		}
 	}
 	
@@ -85,9 +78,9 @@ public abstract class Enemy extends DrawableEntity {
 	public abstract double getSystemDamage();
 	
 	/**
-	 * Reduces the health of this enemy by a specified amount
-	 * @param damage Amount to reduce the health by
-	 * @return True if this enemy died as a result of the damage applied
+	 * Reduces the health of this enemy by a specified amount.
+	 * @param damage Amount to reduce the health by.
+	 * @return True if this enemy died as a result of the damage applied.
 	 */
 	public boolean applyDamage(double damage) {
 		health -= damage;
@@ -115,7 +108,7 @@ public abstract class Enemy extends DrawableEntity {
 	
 	/**
 	 * @return How much money the player is rewarded with
-	 * when this enemy is killed
+	 * when this enemy is killed.
 	 */
 	public abstract double getKillReward();
 	

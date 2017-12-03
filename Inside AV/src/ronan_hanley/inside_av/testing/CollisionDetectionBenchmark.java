@@ -19,7 +19,7 @@ import ronan_hanley.inside_av.weapons_systems.Projectile;
  * @author Ronan
  *
  */
-public class CollisionDetectionBenchmark {
+public final class CollisionDetectionBenchmark {
 	
 	public static void main(String[] args) {
 		final int NUM_ROUNDS = 10000;

@@ -3,6 +3,10 @@ package ronan_hanley.inside_av;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
+/**
+ * Represents an Entity taht can be drawn the the screen.
+ * @author Ronan
+ */
 public abstract class DrawableEntity extends Entity {
 	private Image sprite;
 	

@@ -15,7 +15,6 @@ import ronan_hanley.inside_av.enemy.Enemy;
  *
  */
 public abstract class Projectile extends RotationalEntity {
-	private double angle;
 	private double speed;
 	private Image sprite;
 	
@@ -58,10 +57,10 @@ public abstract class Projectile extends RotationalEntity {
 		 * The circle's diameter is 1 game tile long.
 		 */
 		
-		// pythagorean theorem for distance
+		// pythagoras' theorem for distance
 		int distance = (int) Math.sqrt(
-			Math.pow((getXExact() + getHalfWidth()) - (enemy.getXExact() + InsideAV.HALF_TILE_SIZE), 2)
-		  + Math.pow((getYExact() + getHalfHeight()) - (enemy.getYExact() + InsideAV.HALF_TILE_SIZE), 2));
+			Math.pow((getXExact() + getHalfWidth()) - enemy.getCentreX(), 2)
+		  + Math.pow((getYExact() + getHalfHeight()) - enemy.getCentreY(), 2));
 		
 		boolean colliding = (distance < InsideAV.HALF_TILE_SIZE + getHalfHeight());
 		

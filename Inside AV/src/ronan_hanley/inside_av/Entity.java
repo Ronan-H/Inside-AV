@@ -52,6 +52,14 @@ public abstract class Entity {
 		return y;
 	}
 	
+	public int getCentreX() {
+		return getX() + InsideAV.HALF_TILE_SIZE;
+	}
+	
+	public int getCentreY() {
+		return getY() + InsideAV.HALF_TILE_SIZE;
+	}
+	
 	public void changeX(double change) {
 		setX(getXExact() + change);
 	}

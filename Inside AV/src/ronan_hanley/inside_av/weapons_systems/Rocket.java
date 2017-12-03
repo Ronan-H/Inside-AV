@@ -11,7 +11,7 @@ public final class Rocket extends Projectile {
 	public static final Image SPRITE;
 	private Random random;
 	// turning speed, in radians per tick
-	private static final double TURN_SPEED = (Math.PI * 2) / 32;
+	private static final double TURN_SPEED = (Math.PI * 2) / 24;
 	// the weapon this rocket belongs to (used for targeting)
 	private WeaponSystem weapon;
 	
@@ -48,6 +48,7 @@ public final class Rocket extends Projectile {
 		 * (will be the angle between the rocket and the enemy) 
 		 */
 		Enemy target = weapon.target;
+		
 		// inverse tan is useful here
 		double targetAngle = Math.atan2(target.getYExact() - getYExact(), target.getXExact() - getXExact());
 		
@@ -55,11 +56,13 @@ public final class Rocket extends Projectile {
 		 * meet the target angle 
 		 */
 		double difference = targetAngle - getAngle();
+		difference %= (Math.PI * 2);
+		
 		// only change the angle if it's within a certain range
 		/* this stops the rocket from constantly jiggling back and forth
 		 * when it's close to the target angle
 		 */
-		if (Math.abs(difference) > TURN_SPEED * 2) {
+		if (Math.abs(difference) >= TURN_SPEED) {
 			changeAngle(difference > 0 ? TURN_SPEED : -TURN_SPEED);
 		}
 		
@@ -67,7 +70,7 @@ public final class Rocket extends Projectile {
 		
 		// make the rocket get faster and faster as it flies
 		// (but have a maximum speed)
-		setSpeed(Math.min(5, getSpeed() * 1.05));
+		setSpeed(Math.min(4, getSpeed() * 1.07));
 	}
 	
 	@Override

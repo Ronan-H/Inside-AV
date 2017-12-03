@@ -3,7 +3,7 @@ package ronan_hanley.inside_av.weapons_systems;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Bullet extends Projectile {
+public final class Bullet extends Projectile {
 	public static final Image SPRITE;
 	
 	static {

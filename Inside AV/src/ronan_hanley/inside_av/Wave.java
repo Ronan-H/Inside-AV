@@ -17,7 +17,7 @@ import ronan_hanley.inside_av.enemy.Virus;
  * the timing of how the spawn.
  * @author Ronan
  */
-public class Wave {
+public final class Wave {
 	private int[] enemyIDs;
 	private double[] spawnTimes;
 	private LevelRoute levelRoute;
@@ -83,9 +83,9 @@ public class Wave {
 	}
 	
 	/**
-	 * Add a new enemy if it's time
+	 * Add a new enemy if it's time.
 	 * @param enemies
-	 * @boolean wave finished?
+	 * @boolean True if wave finished.
 	 */
 	public boolean updateWave(ArrayList<Enemy> enemies) {
 		if (enemiesSpawned >= spawnTimes.length) {

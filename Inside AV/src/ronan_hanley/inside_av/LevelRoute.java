@@ -6,11 +6,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
+
 /**
  * Represents the route the enemies will take
- * in the level
+ * in the level.
  * @author Ronan
  */
 public final class LevelRoute {
@@ -78,19 +78,12 @@ public final class LevelRoute {
 		int lastX = -1000;
 		int lastY = -1000;
 		
-		int counter = 0;
 		outerLoop:
 		while ((x == endPoint.x && y == endPoint.y) == false) {
-			// DEBUG
-			// System.out.printf("x: %d y: %d%n", x, y); 
-			
 			// Search for adjacent ROUTE_COLOR pixel
 			for (int i = 0; i < OFFSETS.length; ++i) {
 				int newX = x + OFFSETS[i][0];
 				int newY = y + OFFSETS[i][1];
-				
-				// DEBUG:
-				//System.out.printf("current: (%d, %d) - last: (%d, %d) - new: (%d, %d)%n", x, y, lastX, lastY, newX, newY);
 				
 				// Check if this pixel is the one we came from
 				if (newX == lastX && newY == lastY) {
@@ -119,11 +112,11 @@ public final class LevelRoute {
 	/**
 	 * Simplifies the set of instructions.
 	 * 
-	 * Optimizes like so (example):
+	 * Optimises like so (example):
 	 * Go right 3 times --> Go right once, for the same distance as going 3 times
-	 * ie, never have the same direction twice in a row.
+	 * i.e, never have the same direction twice in a row.
 	 * 
-	 * @param instructions The set of instructions to optimize
+	 * @param instructions The set of instructions to optimise
 	 */
 	private LevelRouteInstruction[] optimizeInstructions(ArrayList<LevelRouteInstruction> instructions) {
 		for (int i = 0; i < instructions.size() -1; ++i) {
@@ -154,6 +147,9 @@ public final class LevelRoute {
 	}
 	
 	@Override
+	/**
+	 * Used in the testing class.
+	 */
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		

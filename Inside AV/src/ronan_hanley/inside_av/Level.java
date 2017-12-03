@@ -11,6 +11,11 @@ import org.newdawn.slick.SlickException;
 
 import ronan_hanley.inside_av.enemy.Enemy;
 
+/**
+ * Represents a single game level (or "stage"), which has
+ * a series of enemy waves.
+ * @author Ronan
+ */
 public final class Level {
 	private int levelNumber;
 	private Image solidImage;
@@ -33,9 +38,6 @@ public final class Level {
 		try {
 			solidImage = new Image(solidImgPath, false, Image.FILTER_NEAREST);
 		} catch (SlickException e) {
-			/* This exception should never happen as long as the files
-			 * are in the right place, so just print the stack trace.
-			 */
 			e.printStackTrace();
 		}
 		
@@ -85,7 +87,7 @@ public final class Level {
 		// draw the solid tiles
 		BufferedImage levelImage = route.getImage();
 		for (int y = 0; y < levelImage.getHeight(); ++y) {
-			for (int x = 0; x < levelImage.getWidth(); x++) {
+			for (int x = 0; x < levelImage.getWidth(); ++x) {
 				if (levelImage.getRGB(x, y) == LevelRoute.SOLID_COLOR) {
 					g.drawImage(solidImage, x * InsideAV.TILE_SIZE, y * InsideAV.TILE_SIZE);
 				}

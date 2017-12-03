@@ -5,7 +5,7 @@ import org.newdawn.slick.SlickException;
 
 import ronan_hanley.inside_av.LevelRoute;
 
-public class Virus extends Enemy {
+public final class Virus extends Enemy {
 	private static Image SPRITE;
 	
 	static {

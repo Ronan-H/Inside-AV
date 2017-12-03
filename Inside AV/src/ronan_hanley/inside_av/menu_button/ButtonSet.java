@@ -12,23 +12,32 @@ public final class ButtonSet {
 	private int startY;
 	private int buttonWidth;
 	private int buttonHeight;
-	private Color buttonColor;
-	private Color buttonHoverColor;
 	private int spacing;
 	private MenuButton[] buttons;
 	
-	public ButtonSet(String[] buttonTexts, int startX, int startY, int buttonWidth, int buttonHeight, Color buttonColor, Color buttonHoverColor, int spacing) {
+	public ButtonSet(String[] buttonTexts,
+					 int startX,
+					 int startY,
+					 int buttonWidth,
+				 	 int buttonHeight,
+					 Color buttonColor,
+					 Color buttonHoverColor,
+					 int spacing) {
 		this.startX = startX;
 		this.startY = startY;
 		this.buttonWidth = buttonWidth;
 		this.buttonHeight = buttonHeight;
-		this.buttonColor = buttonColor;
-		this.buttonHoverColor = buttonHoverColor;
 		this.spacing = spacing;
 		
 		buttons = new MenuButton[buttonTexts.length];
 		for (int i = 0; i < buttonTexts.length; ++i) {
-			buttons[i] = new MenuButton(startX, startY, buttonWidth, buttonHeight, buttonColor, buttonHoverColor, buttonTexts[i]);
+			buttons[i] = new MenuButton(startX,
+				startY,
+				buttonWidth,
+				buttonHeight,
+				buttonColor,
+				buttonHoverColor,
+				buttonTexts[i]);
 			startY += buttonHeight + spacing;
 		}
 	}
@@ -43,8 +52,8 @@ public final class ButtonSet {
 	/**
 	 * Update the buttons based on the cursor position.
 	 * 
-	 * Eg. if the mouse is hovering over a button, render that button
-	 * in the hoverColor instead of color.
+	 * E.g. if the mouse is hovering over a button, render that button
+	 * in the hoverColor instead of colour.
 	 * 
 	 * @return True if the cursor is hovering over a button
 	 */
@@ -52,14 +61,15 @@ public final class ButtonSet {
 		// first, reset the buttons
 		for (MenuButton button : buttons) button.setHovering(false); 
 		
-		if (cursorX >= startX && cursorX <= startX + buttonWidth
-		 && cursorY >= startY && cursorY <= startY + (buttonHeight * buttons.length) + (spacing * (buttons.length -1))) {
+		if (cursorX >= startX
+		 && cursorX <= startX + buttonWidth
+		 && cursorY >= startY
+		 && cursorY <= startY + (buttonHeight * buttons.length) + (spacing * (buttons.length -1))) {
 			 /* Cursor is in the rectangle of buttons
 			  * (but might be over the spacing)
 			  */
 			
 			// cursor x and y, relative to top left of the rectangle of buttons
-			int translatedX = cursorX - startX;
 			int translatedY = cursorY - startY;
 			
 			int buttonNum = translatedY / (buttonHeight + spacing);
@@ -81,7 +91,7 @@ public final class ButtonSet {
 	/**
 	 * This method should be called when the mouse clicks.<br>
 	 * It determines which button (if any) was clicked.<br>
-	 * This is how action can be taken when the user clicks a button.
+	 * This is how action can be taken when the user clicks a button.<br>
 	 * 
 	 * @param cursorX
 	 * @param cursorY
@@ -92,7 +102,6 @@ public final class ButtonSet {
 		// Search through the buttons for a button that's selected
 		for (int i = 0; i < buttons.length; ++i) {
 			if (buttons[i].isHovering()) {
-				// System.out.printf("DEBUG: Button %d clicked.%n", i);
 				return i;
 			}
 		}

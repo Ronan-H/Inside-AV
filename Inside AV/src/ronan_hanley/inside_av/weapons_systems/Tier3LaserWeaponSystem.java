@@ -10,7 +10,6 @@ import ronan_hanley.inside_av.enemy.Enemy;
 
 public final class Tier3LaserWeaponSystem extends LaserWeaponSystem {
 	private static final Image SPRITE;
-	private static final Sound SHOOT_SOUND;
 	
 	static {
 		Image sprite = null;
@@ -21,15 +20,6 @@ public final class Tier3LaserWeaponSystem extends LaserWeaponSystem {
 		}
 		
 		SPRITE = sprite;
-		
-		Sound sound = null;
-		// TODO load shoot sound
-		/*try {
-			// sound = new Sound("res/sound/sfx/laser_shoot.ogg");
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}*/
-		SHOOT_SOUND = sound;
 	}
 	
 	public Tier3LaserWeaponSystem(int x, int y, ArrayList<Enemy> enemies) {
@@ -43,7 +33,7 @@ public final class Tier3LaserWeaponSystem extends LaserWeaponSystem {
 
 	@Override
 	protected Sound getShootSound() {
-		return SHOOT_SOUND;
+		return null;
 	}
 
 	@Override

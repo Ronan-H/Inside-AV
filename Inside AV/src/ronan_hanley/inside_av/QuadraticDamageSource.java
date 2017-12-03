@@ -3,14 +3,14 @@ package ronan_hanley.inside_av;
 import ronan_hanley.inside_av.enemy.Enemy;
 
 /**
- * Class used when damage should be applied using a quadratic equation,
+ * Class used when damage should be applied using a quadratic equation;
  * when damage should fall off dramatically in a "parabolic" fashion,
  * instead of linearly.
  * 
  * An explosion is a good example of this kind of damage source.
  * @author Ronan
  */
-public class QuadraticDamageSource extends Entity{
+public final class QuadraticDamageSource extends Entity{
 	private double maxDamage;
 	private double exponent;
 	
@@ -37,18 +37,17 @@ public class QuadraticDamageSource extends Entity{
 	 * @param enemy The enemy to damage.
 	 */
 	public void damageEnemy(Enemy enemy) {
-		/* First find the distance from the center of the source
+		/* First find the distance from the centre of the source
 		 * to the enemy 
 		 */
 		double distance = Math.sqrt(Math.pow(getXExact() - enemy.getXExact(), 2)
 								  + Math.pow(getYExact() - enemy.getYExact(), 2));
 		
-		// System.out.println("DAMAGE: " + getDamageForDistance(distance));
 		enemy.applyDamage(getDamageForDistance(distance));
 	}
 	
 	public double getDamageForDistance(double distance) {
-		// apply formula (damage = -distance^exponent + maxDamage)
+		// apply the damage formula (damage = -distance^exponent + maxDamage)
 		double damage =  -(Math.pow(distance, exponent)) + maxDamage;
 		
 		return Math.max(damage, 0);

@@ -5,7 +5,7 @@ import org.newdawn.slick.SlickException;
 
 import ronan_hanley.inside_av.LevelRoute;
 
-public class TrackingCookie extends Enemy {
+public final class TrackingCookie extends Enemy {
 	private static Image SPRITE;
 	
 	static {

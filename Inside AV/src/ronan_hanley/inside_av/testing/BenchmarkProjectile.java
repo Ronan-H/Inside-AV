@@ -2,7 +2,7 @@ package ronan_hanley.inside_av.testing;
 
 import ronan_hanley.inside_av.weapons_systems.Projectile;
 
-public class BenchmarkProjectile extends Projectile {
+public final class BenchmarkProjectile extends Projectile {
 
 	public BenchmarkProjectile() {
 		super(0, 0, 0, 0, null);
