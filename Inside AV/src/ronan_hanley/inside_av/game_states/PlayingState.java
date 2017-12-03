@@ -346,7 +346,7 @@ public final class PlayingState extends InsideAVState {
 			// render next level prompt if necessary
 			if (nextLevelPromptShowing) {
 				InsideAV.font.drawString(String.format("Level complete! Press space to continue to level %d.",
-					currentLevel.getLevelNumber()),
+					currentLevel.getLevelNumber() + 1),
 					InsideAV.SCREEN_WIDTH / 2,
 					InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 1,
 					Color.yellow,
@@ -391,6 +391,16 @@ public final class PlayingState extends InsideAVState {
 					(mouseY / InsideAV.TILE_SIZE) * InsideAV.TILE_SIZE,
 					InsideAV.TILE_SIZE,
 					InsideAV.TILE_SIZE);
+			}
+			
+			// render start next wave prompt
+			if (!nextLevelPromptShowing && !currentLevel.isWaveActive()) {
+				InsideAV.font.drawString("Press space to\nstart the next\nwave",
+					InsideAV.STATUS_PANEL_START + InsideAV.STATUS_PANEL_SIZE / 2,
+					InsideAV.SCREEN_HEIGHT - InsideAV.font.getCharHeight() * 2 * 3,
+					Color.yellow,
+					2,
+					true, g);
 			}
 			break;
 		case Substate.TUTORIAL:

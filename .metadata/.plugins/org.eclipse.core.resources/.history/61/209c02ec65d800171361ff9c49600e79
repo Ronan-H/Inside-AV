@@ -35,6 +35,13 @@ import ronan_hanley.inside_av.weapons_systems.Tier1RocketWeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.WeaponSystem;
 import ronan_hanley.inside_av.weapons_systems.WeaponSystemGrid;
 
+/**
+ * The main game state. Used for playing, the tutorial, and anything
+ * else in the Substate class.
+ * 
+ * This class is sort of the centre to all the classes in this project.
+ * @author Ronan
+ */
 public final class PlayingState extends InsideAVState {
 	private static final int NUM_LEVELS = 3;
 	// the level the player is currently on
@@ -42,7 +49,6 @@ public final class PlayingState extends InsideAVState {
 	private Level currentLevel;
 	private ArrayList<Enemy> enemies;
 	// The player's money. Currency is bitcoin.
-	// TODO change back to 150 (current: 615)
 	private static final double STARTING_PLAYER_MONEY = 150;
 	private double playerMoney;
 	/* The health of the computer system; enemies apply damage when
@@ -81,11 +87,9 @@ public final class PlayingState extends InsideAVState {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		input = container.getInput();
 		
-		// TODO Change back to tutorial
 		substate = Substate.TUTORIAL;
 		level =	1;
 		systemHealth = 1000;
-		// TODO remove extra money
 		playerMoney = STARTING_PLAYER_MONEY;
 		
 		if (InsideAV.DEBUG) {
@@ -145,8 +149,11 @@ public final class PlayingState extends InsideAVState {
 							if (projectile.touchingEnemy(enemy)) {
 								if (projectile instanceof Rocket) {
 									// create an explosion
-									QuadraticDamageSource explosion = new QuadraticDamageSource(projectile.getX(), projectile.getY(),
-											projectile.getDamage(), InsideAV.TILE_SIZE * 3);
+									QuadraticDamageSource explosion =
+										new QuadraticDamageSource(projectile.getX(),
+																  projectile.getY(),
+																  projectile.getDamage(),
+																  InsideAV.TILE_SIZE * 3);
 									queueExplosion(explosion);
 								}
 								
@@ -156,6 +163,7 @@ public final class PlayingState extends InsideAVState {
 							}
 						}
 					}
+					
 					// remove projectiles that have hit an enemy
 					for (WeaponSystem weapon : weapons.getWeapons()) {
 						weapon.getProjectiles().removeAll(toRemove);
@@ -193,8 +201,10 @@ public final class PlayingState extends InsideAVState {
 				
 				outerLoop:
 				for (Mortar mortar : mortarsToProcess) {
-					QuadraticDamageSource explosion = new QuadraticDamageSource(mortar.getX(), mortar.getY(),
-							mortar.getDamage(), InsideAV.TILE_SIZE * 4);
+					QuadraticDamageSource explosion =
+						new QuadraticDamageSource(mortar.getX(), mortar.getY(),
+												  mortar.getDamage(),
+												  InsideAV.TILE_SIZE * 4);
 					queueExplosion(explosion);
 					
 					for (WeaponSystem weapon : weapons.getWeapons()) {
@@ -264,15 +274,16 @@ public final class PlayingState extends InsideAVState {
 			// draw rectangle over info panel to hide anything underneath
 			// (eg. stray bullets)
 			g.setColor(Color.black);
-			g.fillRect(InsideAV.STATUS_PANEL_START, 0, InsideAV.STATUS_PANEL_SIZE, InsideAV.SCREEN_HEIGHT);
+			g.fillRect(InsideAV.STATUS_PANEL_START, 0,
+					   InsideAV.STATUS_PANEL_SIZE, InsideAV.SCREEN_HEIGHT);
 			
 			if (selectingWeapon) {
 				weaponWheel.draw(weaponWheelX - InsideAV.TILE_SIZE, weaponWheelY - InsideAV.TILE_SIZE);
 				
 				// draw weapon prices
-				int priceScale = 2;
+				final int PRICE_SCALE = 2;
 				int xOffset = InsideAV.HALF_TILE_SIZE * 3;
-				int yOffset = InsideAV.TILE_SIZE + (InsideAV.font.getCharHeight() * priceScale);
+				int yOffset = InsideAV.TILE_SIZE + (InsideAV.font.getCharHeight() * PRICE_SCALE);
 				
 				double[] prices = {BulletWeaponSystem.COST,
 						   LaserWeaponSystem.COST,
@@ -293,7 +304,12 @@ public final class PlayingState extends InsideAVState {
 							priceColor = Color.red;
 						}
 						
-						InsideAV.font.drawString(Double.toString(prices[priceCounter++]), priceX, priceY, priceColor, priceScale, true, g);
+						InsideAV.font.drawString(Double.toString(prices[priceCounter++]),
+												 priceX,
+												 priceY,
+												 priceColor,
+												 PRICE_SCALE,
+												 true, g);
 					}
 				}
 			}
@@ -302,26 +318,50 @@ public final class PlayingState extends InsideAVState {
 			final int PANEL_TEXT_SCALE = 3;
 			int panelCursorY = PANEL_TEXT_SCALE;
 			InsideAV.font.drawString(String.format("Money:%.1f BTC", playerMoney),
-				InsideAV.STATUS_PANEL_START + PANEL_TEXT_SCALE, panelCursorY, Color.white, 2, false, g);
+				InsideAV.STATUS_PANEL_START + PANEL_TEXT_SCALE,
+				panelCursorY,
+				Color.white,
+				2,
+				false, g);
 			
 			// render system health			
 			panelCursorY += InsideAV.font.getCharHeight() * PANEL_TEXT_SCALE;
 			InsideAV.font.drawString(String.format("Health:%.1f", systemHealth),
-					InsideAV.STATUS_PANEL_START + PANEL_TEXT_SCALE, panelCursorY, Color.white, 2, false, g);
+					InsideAV.STATUS_PANEL_START + PANEL_TEXT_SCALE,
+					panelCursorY,
+					Color.white,
+					2,
+					false, g);
 			
 			// render wave started text if necessary
 			if (currentLevel.isWaveActive() && currentLevel.getWaveTimer() < (3 * InsideAV.FPS)) {
-				InsideAV.font.drawString("Malware payload incoming!!", InsideAV.SCREEN_WIDTH / 2, InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 2, Color.red, 4, true, g);
+				InsideAV.font.drawString("Malware payload incoming!!",
+					 InsideAV.SCREEN_WIDTH / 2,
+					 InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 2,
+					 Color.red,
+					 4,
+					 true, g);
 			}
 			
 			// render next level prompt if necessary
 			if (nextLevelPromptShowing) {
-				InsideAV.font.drawString(String.format("Level complete! Press space to continue to level %d.", currentLevel.getLevelNumber()), InsideAV.SCREEN_WIDTH / 2, InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 1, Color.yellow, 2, true, g);
+				InsideAV.font.drawString(String.format("Level complete! Press space to continue to level %d.",
+					currentLevel.getLevelNumber() + 1),
+					InsideAV.SCREEN_WIDTH / 2,
+					InsideAV.SCREEN_HEIGHT /2 - InsideAV.font.getCharHeight() * 1,
+					Color.yellow,
+					2,
+					true, g);
 			}
 			
-			if (input.isKeyDown(Input.KEY_LSHIFT)) {
+			if (input.isKeyDown(Input.KEY_LSHIFT) && !currentLevel.isWaveActive()) {
 				// display weapon upgrade overlay
-				InsideAV.font.drawString("Click a Weapon To Upgrade It", InsideAV.GAME_SCREEN_WIDTH / 2, 2, Color.white, 2, true, g);
+				InsideAV.font.drawString("Click a Weapon To Upgrade It",
+					InsideAV.GAME_SCREEN_WIDTH / 2,
+					2,
+					Color.white,
+					2,
+					true, g);
 				
 				for (WeaponSystem weapon : weapons.getWeapons()) {
 					double upgradeCost = weapon.getUpgradeCost();
@@ -331,15 +371,37 @@ public final class PlayingState extends InsideAVState {
 					}
 					
 					Color priceColor = (upgradeCost <= playerMoney ? Color.green : Color.red);
-					InsideAV.font.drawString(Double.toString(upgradeCost), weapon.getX(), weapon.getY() - InsideAV.font.getCharHeight(), priceColor, 2, false, g);
+					InsideAV.font.drawString(Double.toString(upgradeCost),
+						weapon.getX() + InsideAV.TILE_SIZE / 2,
+						weapon.getY(),
+						priceColor,
+						1,
+						true, g);
 				}
 			}
 			
-			/* draw a square where the mouse is, so the player
-			 * knows what the grid looks like.
-			 */
-			g.setColor(Color.white);
-			g.drawRect((mouseX / InsideAV.TILE_SIZE) * InsideAV.TILE_SIZE, (mouseY / InsideAV.TILE_SIZE) * InsideAV.TILE_SIZE, InsideAV.TILE_SIZE, InsideAV.TILE_SIZE);
+			if (!selectingWeapon && mouseX < InsideAV.GAME_SCREEN_WIDTH) {
+				/* draw a square where the mouse is, so the player
+				 * knows what the grid looks like.
+				 * 
+				 * taking advantage of integer truncation.
+				 */
+				g.setColor(Color.red);
+				g.drawRect((mouseX / InsideAV.TILE_SIZE) * InsideAV.TILE_SIZE,
+					(mouseY / InsideAV.TILE_SIZE) * InsideAV.TILE_SIZE,
+					InsideAV.TILE_SIZE,
+					InsideAV.TILE_SIZE);
+			}
+			
+			// render start next wave prompt
+			if (!nextLevelPromptShowing && !currentLevel.isWaveActive()) {
+				InsideAV.font.drawString("Press space to\nstart the next\nwave",
+					InsideAV.STATUS_PANEL_START + InsideAV.STATUS_PANEL_SIZE / 2,
+					InsideAV.SCREEN_HEIGHT - InsideAV.font.getCharHeight() * 2 * 3,
+					Color.yellow,
+					2,
+					true, g);
+			}
 			break;
 		case Substate.TUTORIAL:
 			g.setColor(Color.black);
@@ -349,7 +411,12 @@ public final class PlayingState extends InsideAVState {
 			cursorX = InsideAV.TILE_SIZE + 2;
 			cursorY = InsideAV.TILE_SIZE + 2;
 			for (int i = 0; i < TUTORIAL_TEXT.length; ++i) {
-				InsideAV.font.drawString(TUTORIAL_TEXT[i], cursorX, cursorY, Color.green, TUT_TEXT_SCALE, false, g);
+				InsideAV.font.drawString(TUTORIAL_TEXT[i],
+					cursorX,
+					cursorY,
+					Color.green,
+					TUT_TEXT_SCALE,
+					false, g);
 				cursorY += (TUT_TEXT_SCALE * InsideAV.font.getCharHeight()) * 3;
 			}
 			break;
@@ -358,22 +425,51 @@ public final class PlayingState extends InsideAVState {
 			g.fillRect(0, 0, InsideAV.SCREEN_WIDTH, InsideAV.SCREEN_HEIGHT);
 			
 			cursorY = 100;
-			InsideAV.font.drawString("Game Over!", InsideAV.SCREEN_WIDTH / 2, cursorY, Color.red, 10, true, g);
+			InsideAV.font.drawString("Game Over!",
+				InsideAV.SCREEN_WIDTH / 2,
+				cursorY,
+				Color.red,
+				10,
+				true, g);
 			cursorY += (InsideAV.font.getCharHeight() + 10) * 10;
-			InsideAV.font.drawString("Press enter to try again", InsideAV.SCREEN_WIDTH / 2, cursorY, Color.white, 4, true, g);
+			InsideAV.font.drawString("Press enter to try again",
+				InsideAV.SCREEN_WIDTH / 2,
+				cursorY,
+				Color.white,
+				4,
+				true, g);
 			cursorY += (InsideAV.font.getCharHeight() + 1) * 6;
-			InsideAV.font.drawString("Maybe you should actually apply yourself this time", InsideAV.SCREEN_WIDTH / 2, cursorY, Color.white, 1, true, g);
+			InsideAV.font.drawString("Maybe you should actually apply yourself this time",
+				InsideAV.SCREEN_WIDTH / 2,
+				cursorY,
+				Color.white,
+				1, true, g);
 			break;
 		case Substate.GAME_WON:
 			g.setColor(Color.black);
 			g.fillRect(0, 0, InsideAV.SCREEN_WIDTH, InsideAV.SCREEN_HEIGHT);
 			
 			cursorY = 100;
-			InsideAV.font.drawString("You win!", InsideAV.SCREEN_WIDTH / 2, cursorY, Color.green, 10, true, g);
+			InsideAV.font.drawString("You win!",
+				InsideAV.SCREEN_WIDTH / 2,
+				cursorY,
+				Color.green,
+				10,
+				true, g);
 			cursorY += (InsideAV.font.getCharHeight() + 10) * 10;
-			InsideAV.font.drawString("Good job.", InsideAV.SCREEN_WIDTH / 2, cursorY, Color.white, 6, true, g);
+			InsideAV.font.drawString("Good job.",
+				InsideAV.SCREEN_WIDTH / 2,
+				cursorY,
+				Color.white,
+				6,
+				true, g);
 			cursorY += (InsideAV.font.getCharHeight() + 1) * 6;
-			InsideAV.font.drawString("Maybe it's time to go outside...", InsideAV.SCREEN_WIDTH / 2, cursorY, Color.white, 1, true, g);
+			InsideAV.font.drawString("Maybe it's time to go outside...",
+				InsideAV.SCREEN_WIDTH / 2,
+				cursorY,
+				Color.white,
+				1,
+				true, g);
 			
 			break;
 		}
@@ -427,35 +523,44 @@ public final class PlayingState extends InsideAVState {
 			// check if the mouse is outside the level area
 			if (x >= InsideAV.STATUS_PANEL_START) return;
 			
+			int tileX = x / InsideAV.TILE_SIZE;
+			int tileY = y / InsideAV.TILE_SIZE;
+			
 			if (currentLevel.isWaveActive() == false) {
+				// weapon purchasing or upgrading
+				
 				// not selecting weapon yet
-				int tileX = x / InsideAV.TILE_SIZE;
-				int tileY = y / InsideAV.TILE_SIZE;
 				
 				// check if the player clicked a wall
 				if (currentLevel.solidAt(tileX, tileY) == false) return;
 				
-				if (weapons.tileHasWeapon(tileX, tileY)) {
+				if (input.isKeyDown(Input.KEY_LSHIFT) && weapons.tileHasWeapon(tileX, tileY)) {
 					// weapon upgrades
+					WeaponSystem oldWeapon = weapons.getWeaponAt(tileX, tileY);
+					double upgradeCost = oldWeapon.getUpgradeCost();
 					
+					WeaponSystem upgradedWeapon = oldWeapon.getUpgradedWeapon();
+					
+					if (upgradedWeapon != null && upgradeCost <= playerMoney) {
+						weapons.upgradeWeaponAt(tileX, tileY);
+						playerMoney -= upgradeCost;
+					}
 				} else {
 					// weapon select
 					weaponWheelX = x;
 					weaponWheelY = y;
+					
+					selectingWeapon = true;
 				}
-				
-				selectingWeapon = true;
 			}
 		}
 	}
 	
 	@Override
-	public void mouseReleased(int button, int x, int y) {}
-	
-	@Override
 	public void mouseMoved(int oldX, int oldY, int newX, int newY) {
-		mouseX = newX / InsideAV.TILE_SIZE;
-		mouseY = newY / InsideAV.TILE_SIZE;
+		// update mouse location
+		mouseX = newX / InsideAV.screenScale;
+		mouseY = newY / InsideAV.screenScale;
 	}
 	
 	@Override

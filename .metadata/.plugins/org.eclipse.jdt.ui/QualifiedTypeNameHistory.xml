@@ -18,7 +18,6 @@
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.LevelRoute"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Graphics"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.Color"/>
-<fullyQualifiedTypeName name="ronan_hanley.inside_av.InsideAV"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.QuadraticDamageSource"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier1MortarWeaponSystem"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier1LaserWeaponSystem"/>
@@ -26,4 +25,5 @@
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier2MortarWeaponSystem"/>
 <fullyQualifiedTypeName name="ronan_hanley.inside_av.weapons_systems.Tier3BulletWeaponSystem"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="ronan_hanley.inside_av.InsideAV"/>
 </qualifiedTypeNameHistroy>
