@@ -49,7 +49,7 @@ public final class PlayingState extends InsideAVState {
 	private Level currentLevel;
 	private ArrayList<Enemy> enemies;
 	// The player's money. Currency is bitcoin.
-	private static final double STARTING_PLAYER_MONEY = 150;
+	private static final double STARTING_PLAYER_MONEY = 100000;
 	private double playerMoney;
 	/* The health of the computer system; enemies apply damage when
 	 * they reach the end point. If this reaches 0, it's game over.
@@ -88,7 +88,7 @@ public final class PlayingState extends InsideAVState {
 		input = container.getInput();
 		
 		substate = Substate.TUTORIAL;
-		level =	1;
+		level =	2;
 		systemHealth = 1000;
 		playerMoney = STARTING_PLAYER_MONEY;
 		

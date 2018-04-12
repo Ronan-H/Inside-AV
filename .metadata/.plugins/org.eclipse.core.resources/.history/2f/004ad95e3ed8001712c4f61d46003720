@@ -1,9 +1,0 @@
-package ronan_hanley.inside_av.weapons_systems;
-
-public class Tier3BulletWeaponSystem {
-
-	public Tier3BulletWeaponSystem() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
