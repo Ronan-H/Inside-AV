@@ -1,3 +1,0 @@
-// cursor x and y, relative to top left of the rectangle of buttons
-		int translatedX = cursorX - startX;
-		int translatedY = cursorY - startY;
